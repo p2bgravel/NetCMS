@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 02, 2019 at 11:06 AM
+-- Generation Time: May 02, 2019 at 11:33 AM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.8
 
@@ -17,442 +17,1612 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cms__AliasPartIndex`
+-- Table structure for table `cms_core_ncc_category`
 --
 
-CREATE TABLE `cms__AliasPartIndex` (
+CREATE TABLE `cms_core_ncc_category` (
+  `Id` bigint(20) NOT NULL,
+  `CategoryImage` longtext,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `ParentId` bigint(20) DEFAULT NULL,
+  `Status` int(11) NOT NULL,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_category`
+--
+
+INSERT INTO `cms_core_ncc_category` (`Id`, `CategoryImage`, `CreateBy`, `CreationDate`, `Metadata`, `ModificationDate`, `ModifyBy`, `Name`, `ParentId`, `Status`, `VersionNumber`) VALUES
+(1, '/media/Images/2017/06/image-slider-0.jpg', 0, '2019-05-02 11:32:47.953125', 'DEMODATA', '2019-05-02 11:32:47.953125', 0, 'Sample Category ', NULL, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_category_details`
+--
+
+CREATE TABLE `cms_core_ncc_category_details` (
+  `Id` bigint(20) NOT NULL,
+  `CategoryId` bigint(20) DEFAULT NULL,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Language` longtext,
+  `MetaDescription` longtext,
+  `MetaKeyword` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `Slug` longtext,
+  `Status` int(11) NOT NULL,
+  `Title` longtext,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_category_details`
+--
+
+INSERT INTO `cms_core_ncc_category_details` (`Id`, `CategoryId`, `CreateBy`, `CreationDate`, `Language`, `MetaDescription`, `MetaKeyword`, `Metadata`, `ModificationDate`, `ModifyBy`, `Name`, `Slug`, `Status`, `Title`, `VersionNumber`) VALUES
+(1, 1, 0, '2019-05-02 11:32:47.952164', 'en', NULL, NULL, '', '2019-05-02 11:32:47.952165', 0, 'Sample-Category', 'Sample-Category', 0, 'Sample Category ', 1),
+(2, 1, 0, '2019-05-02 11:32:47.952382', 'bn', NULL, NULL, '', '2019-05-02 11:32:47.952383', 0, 'নমুনা-ক্যাটাগরি', 'নমুনা-ক্যাটাগরি', 0, 'নমুনা ক্যাটাগরি ', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_comment`
+--
+
+CREATE TABLE `cms_core_ncc_comment` (
+  `Id` bigint(20) NOT NULL,
+  `AuthorId` bigint(20) DEFAULT NULL,
+  `AuthorName` longtext,
+  `CommentStatus` int(11) NOT NULL,
+  `Content` longtext,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Email` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `PostId` bigint(20) DEFAULT NULL,
+  `Status` int(11) NOT NULL,
+  `Title` longtext,
+  `VersionNumber` int(11) NOT NULL,
+  `WebSite` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_comment`
+--
+
+INSERT INTO `cms_core_ncc_comment` (`Id`, `AuthorId`, `AuthorName`, `CommentStatus`, `Content`, `CreateBy`, `CreationDate`, `Email`, `Metadata`, `ModificationDate`, `ModifyBy`, `Name`, `PostId`, `Status`, `Title`, `VersionNumber`, `WebSite`) VALUES
+(1, NULL, NULL, 1, 'This is a sample comment.', 0, '2019-05-02 11:32:48.711447', NULL, 'DEMODATA', '2019-05-02 11:32:48.711447', 0, 'Sample Comments', 1, 0, NULL, 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_menu`
+--
+
+CREATE TABLE `cms_core_ncc_menu` (
+  `Id` bigint(20) NOT NULL,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `MenuIconCls` longtext,
+  `MenuLanguage` longtext,
+  `MenuOrder` int(11) NOT NULL,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `Position` longtext,
+  `Status` int(11) NOT NULL,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_menu`
+--
+
+INSERT INTO `cms_core_ncc_menu` (`Id`, `CreateBy`, `CreationDate`, `MenuIconCls`, `MenuLanguage`, `MenuOrder`, `Metadata`, `ModificationDate`, `ModifyBy`, `Name`, `Position`, `Status`, `VersionNumber`) VALUES
+(1, 0, '2019-05-02 11:32:48.742918', NULL, '', 1, '', '2019-05-02 11:32:48.742918', 0, 'Main Menu', 'Navigation', 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_menu_item`
+--
+
+CREATE TABLE `cms_core_ncc_menu_item` (
+  `Id` bigint(20) NOT NULL,
+  `Action` longtext,
+  `Controller` longtext,
+  `Area` longtext,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Data` longtext,
+  `MenuActionType` int(11) NOT NULL,
+  `MenuFor` int(11) NOT NULL,
+  `MenuIconCls` longtext,
+  `MenuOrder` int(11) NOT NULL,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Module` longtext,
+  `Name` longtext,
+  `NccMenuId` bigint(20) DEFAULT NULL,
+  `NccMenuItemId` bigint(20) DEFAULT NULL,
+  `NccMenuItemId1` bigint(20) DEFAULT NULL,
+  `ParentId` bigint(20) DEFAULT NULL,
+  `Position` int(11) NOT NULL,
+  `Status` int(11) NOT NULL,
+  `Target` longtext,
+  `Url` longtext,
+  `IsAnonymous` bit(1) NOT NULL DEFAULT b'0',
+  `IsAllowAuthenticated` bit(1) NOT NULL DEFAULT b'0',
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_menu_item`
+--
+
+INSERT INTO `cms_core_ncc_menu_item` (`Id`, `Action`, `Controller`, `Area`, `CreateBy`, `CreationDate`, `Data`, `MenuActionType`, `MenuFor`, `MenuIconCls`, `MenuOrder`, `Metadata`, `ModificationDate`, `ModifyBy`, `Module`, `Name`, `NccMenuId`, `NccMenuItemId`, `NccMenuItemId1`, `ParentId`, `Position`, `Status`, `Target`, `Url`, `IsAnonymous`, `IsAllowAuthenticated`, `VersionNumber`) VALUES
+(1, '', '', NULL, 0, '2019-05-02 11:32:48.741742', '', 0, 0, NULL, 1, '', '2019-05-02 11:32:48.741743', 0, '', 'Home', 1, NULL, NULL, NULL, 0, 0, '_self', '/', b'0', b'0', 1),
+(2, '', '', NULL, 0, '2019-05-02 11:32:48.742255', '', 0, 0, NULL, 2, '', '2019-05-02 11:32:48.742256', 0, '', 'Sample Page', 1, NULL, NULL, NULL, 0, 0, '_self', '/Sample-Page', b'0', b'0', 1),
+(3, '', '', NULL, 0, '2019-05-02 11:32:48.742272', '', 0, 0, NULL, 3, '', '2019-05-02 11:32:48.742272', 0, '', 'Blog Posts', 1, NULL, NULL, NULL, 0, 0, '_self', '/Post', b'0', b'0', 1),
+(4, '', '', NULL, 0, '2019-05-02 11:32:48.742274', '', 0, 0, NULL, 4, '', '2019-05-02 11:32:48.742274', 0, '', 'Blog Categories', 1, NULL, NULL, NULL, 0, 0, '_self', '/Category', b'0', b'0', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_module`
+--
+
+CREATE TABLE `cms_core_ncc_module` (
+  `Id` bigint(20) NOT NULL,
+  `ExecutionOrder` int(11) NOT NULL DEFAULT '100',
+  `AntiForgery` bit(1) NOT NULL,
+  `Author` longtext,
+  `Category` longtext,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Description` longtext,
+  `Folder` longtext,
+  `IsCore` bit(1) NOT NULL,
+  `Metadata` longtext,
+  `NccVersion` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `ModuleName` longtext,
+  `ModuleStatus` int(11) NOT NULL,
+  `ModuleTitle` longtext,
+  `Name` longtext,
+  `Path` longtext,
+  `Status` int(11) NOT NULL,
+  `Version` longtext,
+  `VersionNumber` int(11) NOT NULL,
+  `WebSite` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_module`
+--
+
+INSERT INTO `cms_core_ncc_module` (`Id`, `ExecutionOrder`, `AntiForgery`, `Author`, `Category`, `CreateBy`, `CreationDate`, `Description`, `Folder`, `IsCore`, `Metadata`, `NccVersion`, `ModificationDate`, `ModifyBy`, `ModuleName`, `ModuleStatus`, `ModuleTitle`, `Name`, `Path`, `Status`, `Version`, `VersionNumber`, `WebSite`) VALUES
+(1, 100, b'1', 'NetCoreCMS', 'Core', 0, '2019-05-02 11:32:52.061013', 'Builtin Content Management System Module.', 'Core.Cms', b'1', '', '0.4.5', '2019-05-02 11:32:52.061013', 0, 'Core.Cms', 3, 'CMS', 'Core.Cms', '/Users/nguyenpham/SourceCode/NetCMS/NetCoreCMS.Web/Core/Core.Cms', 0, '0.1.1', 1, 'http://DotNetCoreCMS.com'),
+(2, 100, b'1', 'NetCoreCMS', 'Core', 0, '2019-05-02 11:32:52.098980', 'Builtin Administration for Content Management.', 'Core.Admin', b'1', '', '0.4.5', '2019-05-02 11:32:52.098980', 0, 'Core.Admin', 3, 'CMS Administration', 'Core.Admin', '/Users/nguyenpham/SourceCode/NetCMS/NetCoreCMS.Web/Core/Core.Admin', 0, '0.1.1', 1, 'http://DotNetCoreCMS.com'),
+(3, 100, b'1', 'NetCoreCMS', 'Core', 0, '2019-05-02 11:32:52.104799', 'Builtin Blog Module.', 'Core.Blog', b'1', '', '0.4.5', '2019-05-02 11:32:52.104799', 0, 'Core.Blog', 3, 'Blog', 'Core.Blog', '/Users/nguyenpham/SourceCode/NetCMS/NetCoreCMS.Web/Core/Core.Blog', 0, '0.1.1', 1, 'http://DotNetCoreCMS.com'),
+(4, 100, b'1', 'NetCoreCMS', 'Core', 0, '2019-05-02 11:32:52.109553', 'Builtin Media module for Content Management.', 'Core.Media', b'1', '', '0.4.5', '2019-05-02 11:32:52.109553', 0, 'Core.Media', 3, 'CMS Media', 'Core.Media', '/Users/nguyenpham/SourceCode/NetCMS/NetCoreCMS.Web/Core/Core.Media', 0, '0.1.1', 1, 'http://DotNetCoreCMS.com'),
+(5, 100, b'1', 'NetCoreCMS', 'Link,share,notice,News', 0, '2019-05-02 11:32:52.115327', 'Easy and smart News Module.', 'NetCoreCMS.EasyNews', b'0', '', '0.4.5', '2019-05-02 11:32:52.115327', 0, 'NetCoreCMS.EasyNews', 0, 'Easy News', 'NetCoreCMS.EasyNews', '/Users/nguyenpham/SourceCode/NetCMS/NetCoreCMS.Web/Modules/NetCoreCMS.EasyNews', 0, '1.1', 1, 'http://DotNetCoreCMS.com'),
+(6, 100, b'1', 'NetCoreCMS', 'Demo, data', 0, '2019-05-02 11:32:52.119609', 'Builtin Demo data for page and blog Module.', 'NetCoreCMS.DemoData', b'0', '', '0.4.5', '2019-05-02 11:32:52.119609', 0, 'NetCoreCMS.DemoData', 0, 'Demo Data', 'NetCoreCMS.DemoData', '/Users/nguyenpham/SourceCode/NetCMS/NetCoreCMS.Web/Modules/NetCoreCMS.DemoData', 0, '0.1.1', 1, 'http://DotNetCoreCMS.com'),
+(7, 100, b'1', 'NetCoreCMS', 'Image,Slider,Media', 0, '2019-05-02 11:32:52.124325', 'Builtin ImageSlider Module.', 'NetCoreCMS.ImageSlider', b'0', '', '0.4.5', '2019-05-02 11:32:52.124325', 0, 'NetCoreCMS.ImageSlider', 0, 'Image Slider', 'NetCoreCMS.ImageSlider', '/Users/nguyenpham/SourceCode/NetCMS/NetCoreCMS.Web/Modules/NetCoreCMS.ImageSlider', 0, '1.0', 1, 'http://DotNetCoreCMS.com'),
+(8, 100, b'1', 'NetCoreCMS', 'HelloWorld,Example', 0, '2019-05-02 11:32:52.128942', 'Builtin Content Management Example Module.', 'NetCoreCMS.HelloWorld', b'0', '', '0.4.5', '2019-05-02 11:32:52.128942', 0, 'NetCoreCMS.HelloWorld', 0, 'NetCoreCMS HelloWorld', 'NetCoreCMS.HelloWorld', '/Users/nguyenpham/SourceCode/NetCMS/NetCoreCMS.Web/Modules/NetCoreCMS.HelloWorld', 0, '0.1.1', 1, 'http://DotNetCoreCMS.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_module_dependency`
+--
+
+CREATE TABLE `cms_core_ncc_module_dependency` (
+  `Id` bigint(20) NOT NULL,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Metadata` longtext,
+  `ModuleVersion` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `ModuleName` longtext,
+  `Name` longtext,
+  `NccModuleId` bigint(20) DEFAULT NULL,
+  `Status` int(11) NOT NULL,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_page`
+--
+
+CREATE TABLE `cms_core_ncc_page` (
+  `Id` bigint(20) NOT NULL,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Layout` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `PageOrder` int(11) NOT NULL,
+  `PageStatus` int(11) NOT NULL,
+  `PageType` int(11) NOT NULL,
+  `ParentId` bigint(20) DEFAULT NULL,
+  `PublishDate` datetime(6) NOT NULL,
+  `Status` int(11) NOT NULL,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_page`
+--
+
+INSERT INTO `cms_core_ncc_page` (`Id`, `CreateBy`, `CreationDate`, `Layout`, `Metadata`, `ModificationDate`, `ModifyBy`, `Name`, `PageOrder`, `PageStatus`, `PageType`, `ParentId`, `PublishDate`, `Status`, `VersionNumber`) VALUES
+(1, 0, '2019-05-02 11:32:47.890305', 'SiteLayout', 'DEMODATA', '2019-05-02 11:32:47.890305', 0, 'Sample Page ', 0, 2, 0, NULL, '2019-05-02 11:32:47.888476', 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_page_details`
+--
+
+CREATE TABLE `cms_core_ncc_page_details` (
+  `Id` bigint(20) NOT NULL,
+  `Content` longtext,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Language` longtext,
+  `MetaDescription` longtext,
+  `MetaKeyword` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `PageId` bigint(20) DEFAULT NULL,
+  `Slug` longtext,
+  `Status` int(11) NOT NULL,
+  `Title` longtext,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_page_details`
+--
+
+INSERT INTO `cms_core_ncc_page_details` (`Id`, `Content`, `CreateBy`, `CreationDate`, `Language`, `MetaDescription`, `MetaKeyword`, `Metadata`, `ModificationDate`, `ModifyBy`, `Name`, `PageId`, `Slug`, `Status`, `Title`, `VersionNumber`) VALUES
+(1, '<h1 style=\"text-align:center\">Sample Page </h1><p>This is a sample page.</p>', 0, '2019-05-02 11:32:47.888747', 'en', 'Sample Page  This is a sample page.', NULL, '', '2019-05-02 11:32:47.888748', 0, 'Sample-Page', 1, 'Sample-Page', 0, 'Sample Page ', 1),
+(2, '<h1 style=\"text-align:center\">নমুনা পৃষ্ঠা </h1><p>এটি একটি নমুনা পাতা।</p>', 0, '2019-05-02 11:32:47.889056', 'bn', 'নমুনা পৃষ্ঠা  এটি একটি নমুনা পাতা।', NULL, '', '2019-05-02 11:32:47.889057', 0, 'নমুনা-পৃষ্ঠা', 1, 'নমুনা-পৃষ্ঠা', 0, 'নমুনা পৃষ্ঠা ', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_page_details_history`
+--
+
+CREATE TABLE `cms_core_ncc_page_details_history` (
+  `Id` bigint(20) NOT NULL,
+  `Content` longtext,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Language` longtext,
+  `MetaDescription` longtext,
+  `MetaKeyword` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `PageDetailsId` bigint(20) NOT NULL,
+  `PageHistoryId` bigint(20) DEFAULT NULL,
+  `Slug` longtext,
+  `Status` int(11) NOT NULL,
+  `Title` longtext,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_page_history`
+--
+
+CREATE TABLE `cms_core_ncc_page_history` (
+  `Id` bigint(20) NOT NULL,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Layout` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `PageId` bigint(20) NOT NULL,
+  `PageOrder` int(11) NOT NULL,
+  `PageStatus` int(11) NOT NULL,
+  `PageType` int(11) NOT NULL,
+  `ParentId` bigint(20) DEFAULT NULL,
+  `PublishDate` datetime(6) NOT NULL,
+  `Status` int(11) NOT NULL,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_permission`
+--
+
+CREATE TABLE `cms_core_ncc_permission` (
+  `Id` bigint(20) NOT NULL,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Description` longtext,
+  `Group` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `Rank` int(11) NOT NULL,
+  `Status` int(11) NOT NULL,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_permission`
+--
+
+INSERT INTO `cms_core_ncc_permission` (`Id`, `CreateBy`, `CreationDate`, `Description`, `Group`, `Metadata`, `ModificationDate`, `ModifyBy`, `Name`, `Rank`, `Status`, `VersionNumber`) VALUES
+(1, 0, '2019-05-02 11:32:46.229590', 'Permission for Administrative users.', 'NetCoreCMS', '', '2019-05-02 11:32:46.229590', 0, 'Administrator', 1, 0, 1),
+(2, 0, '2019-05-02 11:32:46.427406', 'Permission for Managers.', 'NetCoreCMS', '', '2019-05-02 11:32:46.427406', 0, 'Manager', 2, 0, 1),
+(3, 0, '2019-05-02 11:32:46.432862', 'Permission for Editor.', 'NetCoreCMS', '', '2019-05-02 11:32:46.432862', 0, 'Editor', 3, 0, 1),
+(4, 0, '2019-05-02 11:32:46.433374', 'Permission for Authors.', 'NetCoreCMS', '', '2019-05-02 11:32:46.433374', 0, 'Author', 4, 0, 1),
+(5, 0, '2019-05-02 11:32:46.433667', 'Permission for Contributor.', 'NetCoreCMS', '', '2019-05-02 11:32:46.433667', 0, 'Contributor', 5, 0, 1),
+(6, 0, '2019-05-02 11:32:46.434019', 'Permission for Subscriber.', 'NetCoreCMS', '', '2019-05-02 11:32:46.434019', 0, 'Subscriber', 1000, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_permission_details`
+--
+
+CREATE TABLE `cms_core_ncc_permission_details` (
+  `Id` bigint(20) NOT NULL,
+  `Action` longtext,
+  `Controller` longtext,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `ExtraAllowUserId` bigint(20) DEFAULT NULL,
+  `ExtraDenyUserId` bigint(20) DEFAULT NULL,
+  `MenuType` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `ModuleName` longtext,
+  `Name` longtext,
+  `Order` int(11) NOT NULL,
+  `PermissionId` bigint(20) DEFAULT NULL,
+  `Requirements` longtext,
+  `Status` int(11) NOT NULL,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_permission_details`
+--
+
+INSERT INTO `cms_core_ncc_permission_details` (`Id`, `Action`, `Controller`, `CreateBy`, `CreationDate`, `ExtraAllowUserId`, `ExtraDenyUserId`, `MenuType`, `Metadata`, `ModificationDate`, `ModifyBy`, `ModuleName`, `Name`, `Order`, `PermissionId`, `Requirements`, `Status`, `VersionNumber`) VALUES
+(1, 'Index', 'Admin', 0, '2017-11-18 21:57:55.962886', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.962887', 0, 'Core.Admin', 'Admin Index', 4, 1, NULL, 0, 1),
+(2, 'Manage', 'Tags', 0, '2017-11-18 21:57:55.963505', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963505', 0, 'Core.Blog', 'Tags', 7, 2, NULL, 0, 1),
+(3, 'Index', 'CmsMenu', 0, '2017-11-18 21:57:55.963577', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963577', 0, 'Core.Cms', 'Menu', 1, 2, NULL, 0, 1),
+(4, 'CreateEdit', 'CmsPage', 0, '2017-11-18 21:57:55.963580', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963580', 0, 'Core.Cms', 'New page', 3, 2, NULL, 0, 1),
+(5, 'Manage', 'CmsPage', 0, '2017-11-18 21:57:55.963581', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963581', 0, 'Core.Cms', 'Manage', 1, 2, NULL, 0, 1),
+(6, 'Upload', 'MediaHome', 0, '2017-11-18 21:57:55.963641', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963641', 0, 'Core.Media', 'Upload', 5, 2, NULL, 0, 1),
+(7, 'Index', 'MediaHome', 0, '2017-11-18 21:57:55.963643', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963643', 0, 'Core.Media', 'Manage Gallary', 1, 2, NULL, 0, 1),
+(8, 'ManageFiles', 'MediaHome', 0, '2017-11-18 21:57:55.963644', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963644', 0, 'Core.Media', 'Manage Files', 3, 2, NULL, 0, 1),
+(9, 'Index', 'Admin', 0, '2017-11-18 21:57:55.962886', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.962887', 0, 'Core.Admin', 'Admin Index', 4, 3, NULL, 0, 1),
+(10, 'Index', 'Dashboard', 0, '2017-11-18 21:57:55.962886', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.962887', 0, 'Core.Admin', 'Dashboard', 4, 3, NULL, 0, 1),
+(11, 'TranslationFiles', 'Language', 0, '2017-11-18 21:57:55.963441', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963441', 0, 'Core.Admin', 'Translation', 200, 3, NULL, 0, 1),
+(12, 'Manage', 'Comments', 0, '2017-11-18 21:57:55.963496', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963496', 0, 'Core.Blog', 'Manage Comments', 9, 3, NULL, 0, 1),
+(13, 'CreateEdit', 'Post', 0, '2017-11-18 21:57:55.963498', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963498', 0, 'Core.Blog', 'New post', 3, 3, NULL, 0, 1),
+(14, 'Manage', 'Post', 0, '2017-11-18 21:57:55.963499', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963499', 0, 'Core.Blog', 'Manage post', 1, 3, NULL, 0, 1),
+(15, 'Manage', 'Category', 0, '2017-11-18 21:57:55.963503', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963503', 0, 'Core.Blog', 'Category', 5, 3, NULL, 0, 1),
+(16, 'Manage', 'Category', 0, '2017-11-18 21:57:55.963503', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963503', 0, 'Core.Blog', 'Category', 5, 2, NULL, 0, 1),
+(17, 'Manage', 'Tags', 0, '2017-11-18 21:57:55.963505', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963505', 0, 'Core.Blog', 'Tags', 7, 3, NULL, 0, 1),
+(18, 'Index', 'MediaHome', 0, '2017-11-18 21:57:55.963643', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963643', 0, 'Core.Media', 'Manage Gallary', 1, 3, NULL, 0, 1),
+(19, 'ManageFiles', 'MediaHome', 0, '2017-11-18 21:57:55.963644', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963644', 0, 'Core.Media', 'Manage Files', 3, 3, NULL, 0, 1),
+(20, 'Index', 'Admin', 0, '2017-11-18 21:57:55.962886', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.962887', 0, 'Core.Admin', 'Admin Index', 4, 4, NULL, 0, 1),
+(21, 'Index', 'Dashboard', 0, '2017-11-18 21:57:55.962886', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.962887', 0, 'Core.Admin', 'Dashboard', 4, 4, NULL, 0, 1),
+(22, 'Manage', 'CommentsAuthor', 0, '2017-11-18 21:57:55.963496', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963496', 0, 'Core.Blog', 'Manage Comments', 9, 4, NULL, 0, 1),
+(23, 'CreateEdit', 'PostAuthor', 0, '2017-11-18 21:57:55.963498', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963498', 0, 'Core.Blog', 'New post', 3, 4, NULL, 0, 1),
+(24, 'Manage', 'PostAuthor', 0, '2017-11-18 21:57:55.963499', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963499', 0, 'Core.Blog', 'Manage post', 1, 4, NULL, 0, 1),
+(25, 'Upload', 'MediaHome', 0, '2017-11-18 21:57:55.963641', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963641', 0, 'Core.Media', 'Upload', 5, 4, NULL, 0, 1),
+(26, 'Index', 'MediaHome', 0, '2017-11-18 21:57:55.963643', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963643', 0, 'Core.Media', 'Manage Gallary', 1, 4, NULL, 0, 1),
+(27, 'Index', 'Admin', 0, '2017-11-18 21:57:55.962886', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.962887', 0, 'Core.Admin', 'Admin Index', 4, 5, NULL, 0, 1),
+(28, 'Index', 'Dashboard', 0, '2017-11-18 21:57:55.962886', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.962887', 0, 'Core.Admin', 'Dashboard', 4, 5, NULL, 0, 1),
+(29, 'CreateEdit', 'PostAuthor', 0, '2017-11-18 21:57:55.963498', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963498', 0, 'Core.Blog', 'New post', 3, 5, NULL, 0, 1),
+(30, 'Manage', 'PostAuthor', 0, '2017-11-18 21:57:55.963499', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963499', 0, 'Core.Blog', 'Manage post', 1, 5, NULL, 0, 1),
+(31, 'Manage', 'Post', 0, '2017-11-18 21:57:55.963499', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963499', 0, 'Core.Blog', 'Manage post', 1, 5, NULL, 0, 1),
+(32, 'Upload', 'MediaHome', 0, '2017-11-18 21:57:55.963641', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963641', 0, 'Core.Media', 'Upload', 5, 3, NULL, 0, 1),
+(33, 'Manage', 'Post', 0, '2017-11-18 21:57:55.963499', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963499', 0, 'Core.Blog', 'Manage post', 1, 2, NULL, 0, 1),
+(34, 'CreateEdit', 'Post', 0, '2017-11-18 21:57:55.963498', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963498', 0, 'Core.Blog', 'New post', 3, 2, NULL, 0, 1),
+(35, 'Manage', 'Comments', 0, '2017-11-18 21:57:55.963496', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963496', 0, 'Core.Blog', 'Manage Comments', 9, 2, NULL, 0, 1),
+(36, 'Index', 'Dashboard', 0, '2017-11-18 21:57:55.962886', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.962887', 0, 'Core.Admin', 'Dashboard', 4, 1, NULL, 0, 1),
+(37, 'ManageUserRoles', 'UserAuth', 0, '2017-11-18 21:57:55.962886', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.962887', 0, 'Core.Admin', 'Manage User Roles', 4, 1, NULL, 0, 1),
+(38, 'CreateEdit', 'Users', 0, '2017-11-18 21:57:55.963425', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963425', 0, 'Core.Admin', 'New User', 1, 1, NULL, 0, 1),
+(39, 'Index', 'Users', 0, '2017-11-18 21:57:55.963429', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963429', 0, 'Core.Admin', 'Manage Users', 2, 1, NULL, 0, 1),
+(40, 'Settings', 'Admin', 0, '2017-11-18 21:57:55.963433', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963433', 0, 'Core.Admin', 'General', 2, 1, NULL, 0, 1),
+(41, 'Startup', 'Admin', 0, '2017-11-18 21:57:55.963434', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963434', 0, 'Core.Admin', 'Startup', 3, 1, NULL, 0, 1),
+(42, 'EmailSettings', 'Admin', 0, '2017-11-18 21:57:55.963435', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963435', 0, 'Core.Admin', 'Email', 4, 1, NULL, 0, 1),
+(43, 'Logging', 'Admin', 0, '2017-11-18 21:57:55.963436', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963436', 0, 'Core.Admin', 'Logging', 5, 1, NULL, 0, 1),
+(44, 'MaintenanceMode', 'Admin', 0, '2017-11-18 21:57:55.963437', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963437', 0, 'Core.Admin', 'Maintenance Mode', 10, 1, NULL, 0, 1),
+(45, 'Index', 'CmsModule', 0, '2017-11-18 21:57:55.963438', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963438', 0, 'Core.Admin', 'Manage', 1, 1, NULL, 0, 1),
+(46, 'Index', 'CmsTheme', 0, '2017-11-18 21:57:55.963439', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963439', 0, 'Core.Admin', 'Theme', 3, 1, NULL, 0, 1),
+(47, 'Settings', 'CmsTheme', 0, '2017-11-18 21:57:55.963439', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963439', 0, 'Core.Admin', 'Theme Settings', 3, 1, NULL, 0, 1),
+(48, 'Index', 'CmsWidget', 0, '2017-11-18 21:57:55.963440', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963440', 0, 'Core.Admin', 'Widget', 2, 1, NULL, 0, 1),
+(49, 'TranslationFiles', 'Language', 0, '2017-11-18 21:57:55.963441', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963441', 0, 'Core.Admin', 'Translation', 200, 1, NULL, 0, 1),
+(50, 'Manage', 'Comments', 0, '2017-11-18 21:57:55.963496', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963496', 0, 'Core.Blog', 'Manage Comments', 9, 1, NULL, 0, 1),
+(51, 'CreateEdit', 'Post', 0, '2017-11-18 21:57:55.963498', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963498', 0, 'Core.Blog', 'New post', 3, 1, NULL, 0, 1),
+(52, 'Manage', 'Post', 0, '2017-11-18 21:57:55.963499', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963499', 0, 'Core.Blog', 'Manage post', 1, 1, NULL, 0, 1),
+(53, 'TranslationFiles', 'Language', 0, '2017-11-18 21:57:55.963441', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963441', 0, 'Core.Admin', 'Translation', 200, 2, NULL, 0, 1),
+(54, 'Index', 'CmsWidget', 0, '2017-11-18 21:57:55.963440', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963440', 0, 'Core.Admin', 'Widget', 2, 2, NULL, 0, 1),
+(55, 'Index', 'Users', 0, '2017-11-18 21:57:55.963429', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963429', 0, 'Core.Admin', 'Manage Users', 2, 2, NULL, 0, 1),
+(56, 'CreateEdit', 'Users', 0, '2017-11-18 21:57:55.963425', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963425', 0, 'Core.Admin', 'New User', 1, 2, NULL, 0, 1),
+(57, 'Index', 'Dashboard', 0, '2017-11-18 21:57:55.962886', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.962887', 0, 'Core.Admin', 'Dashboard', 4, 2, NULL, 0, 1),
+(58, 'Index', 'Admin', 0, '2017-11-18 21:57:55.962886', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.962887', 0, 'Core.Admin', 'Admin Index', 4, 2, NULL, 0, 1),
+(59, 'Manage', 'CommentsAuthor', 0, '2017-11-18 21:57:55.963496', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963496', 0, 'Core.Blog', 'Manage Comments', 9, 5, NULL, 0, 1),
+(60, 'ManageFiles', 'MediaHome', 0, '2017-11-18 21:57:55.963644', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963644', 0, 'Core.Media', 'Manage Files', 3, 1, NULL, 0, 1),
+(61, 'Upload', 'MediaHome', 0, '2017-11-18 21:57:55.963641', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963641', 0, 'Core.Media', 'Upload', 5, 1, NULL, 0, 1),
+(62, 'Manage', 'CmsPage', 0, '2017-11-18 21:57:55.963581', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963581', 0, 'Core.Cms', 'Manage', 1, 1, NULL, 0, 1),
+(63, 'CreateEdit', 'CmsPage', 0, '2017-11-18 21:57:55.963580', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963580', 0, 'Core.Cms', 'New page', 3, 1, NULL, 0, 1),
+(64, 'Index', 'CmsMenu', 0, '2017-11-18 21:57:55.963577', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963577', 0, 'Core.Cms', 'Menu', 1, 1, NULL, 0, 1),
+(65, 'Manage', 'Tags', 0, '2017-11-18 21:57:55.963505', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963505', 0, 'Core.Blog', 'Tags', 7, 1, NULL, 0, 1),
+(66, 'Manage', 'Category', 0, '2017-11-18 21:57:55.963503', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963503', 0, 'Core.Blog', 'Category', 5, 1, NULL, 0, 1),
+(67, 'Index', 'MediaHome', 0, '2017-11-18 21:57:55.963643', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963643', 0, 'Core.Media', 'Manage Gallary', 1, 1, NULL, 0, 1),
+(68, 'Upload', 'MediaHome', 0, '2017-11-18 21:57:55.963641', NULL, NULL, 'Admin', '', '2017-11-18 21:57:55.963641', 0, 'Core.Media', 'Upload', 5, 5, NULL, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_plugins`
+--
+
+CREATE TABLE `cms_core_ncc_plugins` (
+  `Id` bigint(20) NOT NULL,
+  `AntiForgery` bit(1) NOT NULL,
+  `Author` longtext,
+  `Category` longtext,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Dependencies` longtext,
+  `Description` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `NetCoreCMSVersion` longtext,
+  `Path` longtext,
+  `PluginsStatus` int(11) NOT NULL,
+  `SortName` longtext,
+  `Status` int(11) NOT NULL,
+  `Version` longtext,
+  `VersionNumber` int(11) NOT NULL,
+  `Website` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_post`
+--
+
+CREATE TABLE `cms_core_ncc_post` (
+  `Id` bigint(20) NOT NULL,
+  `AllowComment` bit(1) NOT NULL,
+  `AuthorId` bigint(20) DEFAULT NULL,
+  `CommentCount` bigint(20) NOT NULL,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `IsFeatured` bit(1) NOT NULL,
+  `IsStiky` bit(1) NOT NULL,
+  `Layout` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `ParentId` bigint(20) DEFAULT NULL,
+  `PostStatus` int(11) NOT NULL,
+  `PostType` int(11) NOT NULL,
+  `PublishDate` datetime(6) NOT NULL,
+  `RelatedPosts` longtext,
+  `Status` int(11) NOT NULL,
+  `ThumImage` longtext,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_post`
+--
+
+INSERT INTO `cms_core_ncc_post` (`Id`, `AllowComment`, `AuthorId`, `CommentCount`, `CreateBy`, `CreationDate`, `IsFeatured`, `IsStiky`, `Layout`, `Metadata`, `ModificationDate`, `ModifyBy`, `Name`, `ParentId`, `PostStatus`, `PostType`, `PublishDate`, `RelatedPosts`, `Status`, `ThumImage`, `VersionNumber`) VALUES
+(1, b'1', NULL, 0, 0, '2019-05-02 11:32:48.380051', b'0', b'0', 'SiteLayout', 'DEMODATA', '2019-05-02 11:32:48.642926', 0, 'Sample Post ', NULL, 2, 0, '2019-05-02 11:32:48.378653', NULL, 0, '/media/Images/2017/06/image-slider-2.jpg', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_post_category`
+--
+
+CREATE TABLE `cms_core_ncc_post_category` (
+  `PostId` bigint(20) NOT NULL,
+  `CategoryId` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_post_category`
+--
+
+INSERT INTO `cms_core_ncc_post_category` (`PostId`, `CategoryId`) VALUES
+(1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_post_details`
+--
+
+CREATE TABLE `cms_core_ncc_post_details` (
+  `Id` bigint(20) NOT NULL,
+  `Content` longtext,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Language` longtext,
+  `MetaDescription` longtext,
+  `MetaKeyword` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `PostId` bigint(20) DEFAULT NULL,
+  `Slug` longtext,
+  `Status` int(11) NOT NULL,
+  `Title` longtext,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_post_details`
+--
+
+INSERT INTO `cms_core_ncc_post_details` (`Id`, `Content`, `CreateBy`, `CreationDate`, `Language`, `MetaDescription`, `MetaKeyword`, `Metadata`, `ModificationDate`, `ModifyBy`, `Name`, `PostId`, `Slug`, `Status`, `Title`, `VersionNumber`) VALUES
+(1, '<h1 style=\"text-align:center\">Sample Post </h1><hr />This is a sample post.', 0, '2019-05-02 11:32:48.379079', 'en', 'Sample Post  This is a sample post.', NULL, '', '2019-05-02 11:32:48.642080', 0, 'Sample-Post', 1, 'Sample-Post', 0, 'Sample Post ', 1),
+(2, '<h1 style=\"text-align:center\">নমুনা পোস্ট </h1><hr />এটি একটি নমুনা পোস্ট।', 0, '2019-05-02 11:32:48.379428', 'bn', 'নমুনা পোস্ট  এটি একটি নমুনা পোস্ট।', NULL, '', '2019-05-02 11:32:48.642080', 0, 'নমুনা-পোস্ট', 1, 'নমুনা-পোস্ট', 0, 'নমুনা পোস্ট ', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_post_tag`
+--
+
+CREATE TABLE `cms_core_ncc_post_tag` (
+  `PostId` bigint(20) NOT NULL,
+  `TagId` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_role`
+--
+
+CREATE TABLE `cms_core_ncc_role` (
+  `Id` bigint(20) NOT NULL,
+  `ConcurrencyStamp` longtext,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` varchar(256) DEFAULT NULL,
+  `NormalizedName` varchar(256) DEFAULT NULL,
+  `Slug` longtext,
+  `Status` int(11) NOT NULL,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_role`
+--
+
+INSERT INTO `cms_core_ncc_role` (`Id`, `ConcurrencyStamp`, `CreateBy`, `CreationDate`, `Metadata`, `ModificationDate`, `ModifyBy`, `Name`, `NormalizedName`, `Slug`, `Status`, `VersionNumber`) VALUES
+(1, 'ba618a34-0d49-49e8-9cb8-0b6d72f2ce7c', 0, '2019-05-02 11:32:46.693287', NULL, '2019-05-02 11:32:46.693372', 0, 'SuperAdmin', 'SUPERADMIN', NULL, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_schedule_task_history`
+--
+
+CREATE TABLE `cms_core_ncc_schedule_task_history` (
+  `Id` bigint(20) NOT NULL,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Data` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `Status` int(11) NOT NULL,
+  `TaskCreator` longtext,
+  `TaskId` longtext,
+  `TaskOf` longtext,
+  `TaskType` longtext,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_settings`
+--
+
+CREATE TABLE `cms_core_ncc_settings` (
+  `Id` bigint(20) NOT NULL,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `GroupId` longtext,
+  `Key` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `Status` int(11) NOT NULL,
+  `Value` longtext,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_startup`
+--
+
+CREATE TABLE `cms_core_ncc_startup` (
+  `Id` bigint(20) NOT NULL,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `PermissionId` bigint(20) DEFAULT NULL,
+  `RoleId` bigint(20) NOT NULL,
+  `StartupFor` int(11) NOT NULL,
+  `StartupType` int(11) NOT NULL,
+  `StartupUrl` longtext,
+  `Status` int(11) NOT NULL,
+  `UserId` bigint(20) NOT NULL,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_tag`
+--
+
+CREATE TABLE `cms_core_ncc_tag` (
+  `Id` bigint(20) NOT NULL,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `Status` int(11) NOT NULL,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_user`
+--
+
+CREATE TABLE `cms_core_ncc_user` (
+  `Id` bigint(20) NOT NULL,
+  `AccessFailedCount` int(11) NOT NULL,
+  `ConcurrencyStamp` longtext,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Email` varchar(256) DEFAULT NULL,
+  `EmailConfirmed` bit(1) NOT NULL,
+  `FullName` longtext,
+  `LockoutEnabled` bit(1) NOT NULL,
+  `LockoutEnd` datetime(6) DEFAULT NULL,
+  `Metadata` longtext,
+  `Mobile` longtext,
+  `IsRequireLogin` bit(1) NOT NULL DEFAULT b'0',
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `NormalizedEmail` varchar(256) DEFAULT NULL,
+  `NormalizedUserName` varchar(256) DEFAULT NULL,
+  `PasswordHash` longtext,
+  `PhoneNumber` longtext,
+  `PhoneNumberConfirmed` bit(1) NOT NULL,
+  `SecurityStamp` longtext,
+  `Slug` longtext,
+  `Status` int(11) NOT NULL,
+  `TwoFactorEnabled` bit(1) NOT NULL,
+  `UserName` varchar(256) DEFAULT NULL,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_user`
+--
+
+INSERT INTO `cms_core_ncc_user` (`Id`, `AccessFailedCount`, `ConcurrencyStamp`, `CreateBy`, `CreationDate`, `Email`, `EmailConfirmed`, `FullName`, `LockoutEnabled`, `LockoutEnd`, `Metadata`, `Mobile`, `IsRequireLogin`, `ModificationDate`, `ModifyBy`, `Name`, `NormalizedEmail`, `NormalizedUserName`, `PasswordHash`, `PhoneNumber`, `PhoneNumberConfirmed`, `SecurityStamp`, `Slug`, `Status`, `TwoFactorEnabled`, `UserName`, `VersionNumber`) VALUES
+(1, 0, '4026e934-6ca7-4a34-bc1a-7a5eeb9a429c', 0, '2019-05-02 11:32:47.445037', 'admin@admin.com', b'0', 'Site Super Admin', b'1', NULL, NULL, NULL, b'0', '2019-05-02 11:32:47.445178', 0, 'Super Admin', 'ADMIN@ADMIN.COM', 'ADMIN', 'AQAAAAEAACcQAAAAELxZR3ARX1E4VZDD6MY1T/OeQa1P6lrJib8BXtreHTKVBibgJGzR0mjYtOhXnNQAKQ==', NULL, b'0', '44ebc632-e210-47f3-9b13-f7f35a649e23', NULL, 0, b'0', 'Admin', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_user_permission`
+--
+
+CREATE TABLE `cms_core_ncc_user_permission` (
+  `UserId` bigint(20) NOT NULL,
+  `PermissionId` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_user_role`
+--
+
+CREATE TABLE `cms_core_ncc_user_role` (
+  `UserId` bigint(20) NOT NULL,
+  `RoleId` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_user_role`
+--
+
+INSERT INTO `cms_core_ncc_user_role` (`UserId`, `RoleId`) VALUES
+(1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_web_site`
+--
+
+CREATE TABLE `cms_core_ncc_web_site` (
+  `Id` bigint(20) NOT NULL,
+  `AdminPageSize` int(11) NOT NULL,
+  `AllowRegistration` bit(1) NOT NULL,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `DateFormat` longtext,
+  `DomainName` longtext,
+  `EmailAddress` longtext,
+  `EnableCache` bit(1) NOT NULL DEFAULT b'0',
+  `GoogleAnalyticsId` longtext,
+  `IsMultiLangual` bit(1) NOT NULL,
+  `IsShowFullPost` bit(1) NOT NULL,
+  `Language` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `NewUserRole` longtext,
+  `Status` int(11) NOT NULL,
+  `TablePrefix` longtext,
+  `TimeFormat` longtext,
+  `TimeZone` longtext,
+  `VersionNumber` int(11) NOT NULL,
+  `WebSitePageSize` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_web_site`
+--
+
+INSERT INTO `cms_core_ncc_web_site` (`Id`, `AdminPageSize`, `AllowRegistration`, `CreateBy`, `CreationDate`, `DateFormat`, `DomainName`, `EmailAddress`, `EnableCache`, `GoogleAnalyticsId`, `IsMultiLangual`, `IsShowFullPost`, `Language`, `Metadata`, `ModificationDate`, `ModifyBy`, `Name`, `NewUserRole`, `Status`, `TablePrefix`, `TimeFormat`, `TimeZone`, `VersionNumber`, `WebSitePageSize`) VALUES
+(1, 10, b'1', 0, '2019-05-02 11:32:47.809798', 'dd/MM/yyyy', NULL, 'admin@admin.com', b'0', NULL, b'0', b'0', 'en', '', '2019-05-02 11:32:47.809798', 0, 'nCMS', 'Subscriber', 0, 'cms_', 'hh:mm:ss', 'UTC_6', 1, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_web_site_info`
+--
+
+CREATE TABLE `cms_core_ncc_web_site_info` (
+  `Id` bigint(20) NOT NULL,
+  `Copyrights` longtext,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `FaviconUrl` longtext,
+  `Language` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `NccWebSiteId` bigint(20) DEFAULT NULL,
+  `PrivacyPolicyUrl` longtext,
+  `SiteLogoUrl` longtext,
+  `SiteTitle` longtext,
+  `Status` int(11) NOT NULL,
+  `Tagline` longtext,
+  `TermsAndConditionsUrl` longtext,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cms_core_ncc_web_site_info`
+--
+
+INSERT INTO `cms_core_ncc_web_site_info` (`Id`, `Copyrights`, `CreateBy`, `CreationDate`, `FaviconUrl`, `Language`, `Metadata`, `ModificationDate`, `ModifyBy`, `Name`, `NccWebSiteId`, `PrivacyPolicyUrl`, `SiteLogoUrl`, `SiteTitle`, `Status`, `Tagline`, `TermsAndConditionsUrl`, `VersionNumber`) VALUES
+(1, NULL, 0, '2019-05-02 11:32:47.809448', NULL, 'en', '', '2019-05-02 11:32:47.809450', 0, 'nCMS', 1, NULL, NULL, 'nCMS', 0, 'Website tag line', NULL, 1),
+(2, NULL, 0, '2019-05-02 11:32:47.809662', NULL, 'bn', '', '2019-05-02 11:32:47.809663', 0, 'nCMS', 1, NULL, NULL, 'nCMS', 0, 'Website tag line', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_web_site_widget`
+--
+
+CREATE TABLE `cms_core_ncc_web_site_widget` (
+  `Id` bigint(20) NOT NULL,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `LayoutName` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `ModuleName` longtext,
+  `Name` longtext,
+  `Status` int(11) NOT NULL,
+  `ThemeId` longtext,
+  `VersionNumber` int(11) NOT NULL,
+  `WebSiteId` bigint(20) DEFAULT NULL,
+  `WidgetConfigJson` longtext,
+  `WidgetData` longtext,
+  `WidgetId` longtext,
+  `WidgetOrder` int(11) NOT NULL,
+  `Zone` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_widget`
+--
+
+CREATE TABLE `cms_core_ncc_widget` (
+  `Id` bigint(20) NOT NULL,
+  `Content` longblob,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Dependencies` longtext,
+  `Description` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `NccPluginsId` bigint(20) DEFAULT NULL,
+  `NetCoreCMSVersion` longtext,
+  `SortName` longtext,
+  `Status` int(11) NOT NULL,
+  `Title` longtext,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_core_ncc_widget_section`
+--
+
+CREATE TABLE `cms_core_ncc_widget_section` (
+  `Id` bigint(20) NOT NULL,
+  `CreateBy` bigint(20) NOT NULL,
+  `CreationDate` datetime(6) NOT NULL,
+  `Dependencies` longtext,
+  `Description` longtext,
+  `Metadata` longtext,
+  `ModificationDate` datetime(6) NOT NULL,
+  `ModifyBy` bigint(20) NOT NULL,
+  `Name` longtext,
+  `NetCoreCMSVersion` longtext,
+  `SortName` longtext,
+  `Status` int(11) NOT NULL,
+  `Title` longtext,
+  `VersionNumber` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_ef_identity_role_claim_1`
+--
+
+CREATE TABLE `cms_ef_identity_role_claim_1` (
   `Id` int(11) NOT NULL,
-  `DocumentId` int(11) DEFAULT NULL,
-  `Alias` varchar(64) DEFAULT NULL,
-  `ContentItemId` varchar(26) DEFAULT NULL
+  `ClaimType` longtext,
+  `ClaimValue` longtext,
+  `RoleId` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `cms__AliasPartIndex`
---
-
-INSERT INTO `cms__AliasPartIndex` (`Id`, `DocumentId`, `Alias`, `ContentItemId`) VALUES
-(1, 45, 'main-menu', '4cy6ryt8t7jygwhad0v17jxjca');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cms__AutoroutePartIndex`
+-- Table structure for table `cms_ef_identity_user_claim_1`
 --
 
-CREATE TABLE `cms__AutoroutePartIndex` (
+CREATE TABLE `cms_ef_identity_user_claim_1` (
   `Id` int(11) NOT NULL,
-  `DocumentId` int(11) DEFAULT NULL,
-  `ContentItemId` varchar(26) DEFAULT NULL,
-  `Path` varchar(1024) DEFAULT NULL,
-  `Published` bit(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `cms__AutoroutePartIndex`
---
-
-INSERT INTO `cms__AutoroutePartIndex` (`Id`, `DocumentId`, `ContentItemId`, `Path`, `Published`) VALUES
-(1, 46, '4h7sq49zw10jtyras1100g694n', 'home-page', b'1');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cms__ContainedPartIndex`
---
-
-CREATE TABLE `cms__ContainedPartIndex` (
-  `Id` int(11) NOT NULL,
-  `DocumentId` int(11) DEFAULT NULL,
-  `ListContentItemId` varchar(26) DEFAULT NULL,
-  `Order` int(11) DEFAULT NULL
+  `ClaimType` longtext,
+  `ClaimValue` longtext,
+  `NccUserId` bigint(20) DEFAULT NULL,
+  `UserId` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cms__ContentItemIndex`
+-- Table structure for table `cms_ef_identity_user_login_1`
 --
 
-CREATE TABLE `cms__ContentItemIndex` (
-  `Id` int(11) NOT NULL,
-  `DocumentId` int(11) DEFAULT NULL,
-  `ContentItemId` varchar(26) DEFAULT NULL,
-  `ContentItemVersionId` varchar(26) DEFAULT NULL,
-  `Latest` bit(1) DEFAULT NULL,
-  `Published` bit(1) DEFAULT NULL,
-  `ContentType` varchar(255) DEFAULT NULL,
-  `ModifiedUtc` datetime DEFAULT NULL,
-  `PublishedUtc` datetime DEFAULT NULL,
-  `CreatedUtc` datetime DEFAULT NULL,
-  `Owner` varchar(255) DEFAULT NULL,
-  `Author` varchar(255) DEFAULT NULL,
-  `DisplayText` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `cms__ContentItemIndex`
---
-
-INSERT INTO `cms__ContentItemIndex` (`Id`, `DocumentId`, `ContentItemId`, `ContentItemVersionId`, `Latest`, `Published`, `ContentType`, `ModifiedUtc`, `PublishedUtc`, `CreatedUtc`, `Owner`, `Author`, `DisplayText`) VALUES
-(1, 43, '4z1be9j6ej9fmvqn0zyt9j2f5t', '4yw56kjfn3zdwshzpa2dzkq7w3', b'1', b'1', 'HtmlWidget', '2019-05-02 16:06:03', '2019-05-02 16:06:03', '2019-05-02 16:06:03', 'admin', 'admin', 'Footer'),
-(2, 45, '4cy6ryt8t7jygwhad0v17jxjca', '4wbv2t03ejqqexxhfvn2j6sfxv', b'1', b'1', 'Menu', '2019-05-02 16:06:03', '2019-05-02 16:06:03', '2019-05-02 16:06:03', 'admin', 'admin', 'Main Menu'),
-(3, 46, '4h7sq49zw10jtyras1100g694n', '4p7xe8kvk8hn022gnjxyvpydmt', b'1', b'1', 'LandingPage', '2019-05-02 16:06:03', '2019-05-02 16:06:03', '2019-05-02 16:06:03', 'admin', 'admin', 'NetCMS');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cms__DeploymentPlanIndex`
---
-
-CREATE TABLE `cms__DeploymentPlanIndex` (
-  `Id` int(11) NOT NULL,
-  `DocumentId` int(11) DEFAULT NULL,
-  `Name` varchar(255) DEFAULT NULL
+CREATE TABLE `cms_ef_identity_user_login_1` (
+  `LoginProvider` varchar(127) NOT NULL,
+  `ProviderKey` varchar(127) NOT NULL,
+  `NccUserId` bigint(20) DEFAULT NULL,
+  `ProviderDisplayName` longtext,
+  `UserId` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cms__Document`
+-- Table structure for table `cms_ef_identity_user_token_1`
 --
 
-CREATE TABLE `cms__Document` (
-  `Id` int(11) NOT NULL,
-  `Type` varchar(255) NOT NULL,
-  `Content` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `cms__Document`
---
-
-INSERT INTO `cms__Document` (`Id`, `Type`, `Content`) VALUES
-(1, 'OrchardCore.Environment.Shell.Descriptor.Models.ShellDescriptor, OrchardCore.Abstractions', '{\"Id\":1,\"SerialNumber\":2,\"Features\":[{\"Id\":\"OrchardCore.Cms.Web\",\"AlwaysEnabled\":true},{\"Id\":\"OrchardCore.Features\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Scripting\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Recipes\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Settings\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Admin\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Liquid\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Contents\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.ContentTypes\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Alias\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Autoroute\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.ContentFields\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.ContentPreview\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Contents.FileContentDefinition\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.CustomSettings\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Deployment\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Deployment.Remote\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Diagnostics\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.DynamicCache\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Resources\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Feeds\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Widgets\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Flows\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.HomeRoute\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Html\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Layers\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Lists\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Markdown\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Media\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Title\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Menu\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Navigation\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Queries\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Users\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Roles\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Templates\",\"AlwaysEnabled\":false},{\"Id\":\"OrchardCore.Themes\",\"AlwaysEnabled\":false},{\"Id\":\"SafeMode\",\"AlwaysEnabled\":false},{\"Id\":\"TheAdmin\",\"AlwaysEnabled\":false},{\"Id\":\"TheAgencyTheme\",\"AlwaysEnabled\":false}],\"Parameters\":[]}'),
-(2, 'OrchardCore.Environment.Shell.State.ShellState, OrchardCore.Abstractions', '{\"Features\":[{\"Id\":\"OrchardCore.Cms.Web\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Features\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Scripting\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Recipes\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Settings\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Admin\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Liquid\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Contents\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.ContentTypes\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Alias\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Autoroute\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.ContentFields\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.ContentPreview\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Contents.FileContentDefinition\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.CustomSettings\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Deployment\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Deployment.Remote\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Diagnostics\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.DynamicCache\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Resources\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Feeds\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Widgets\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Flows\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.HomeRoute\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Html\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Layers\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Lists\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Markdown\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Media\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Title\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Menu\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Navigation\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Queries\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Users\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Roles\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Templates\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"OrchardCore.Themes\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"SafeMode\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"TheAdmin\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"},{\"Id\":\"TheAgencyTheme\",\"InstallState\":\"Up\",\"EnableState\":\"Up\"}]}'),
-(21, 'OrchardCore.Data.Migration.Records.DataMigrationRecord, OrchardCore.Data', '{\"Id\":21,\"DataMigrations\":[{\"DataMigrationClass\":\"OrchardCore.ContentManagement.Records.Migrations\",\"Version\":3},{\"DataMigrationClass\":\"OrchardCore.Contents.Migrations\",\"Version\":1},{\"DataMigrationClass\":\"OrchardCore.Liquid.Migrations\",\"Version\":1},{\"DataMigrationClass\":\"OrchardCore.Alias.Migrations\",\"Version\":1},{\"DataMigrationClass\":\"OrchardCore.Autoroute.Migrations\",\"Version\":1},{\"DataMigrationClass\":\"OrchardCore.Deployment.Migrations\",\"Version\":1},{\"DataMigrationClass\":\"OrchardCore.Widgets.Migrations\",\"Version\":1},{\"DataMigrationClass\":\"OrchardCore.Flows.Migrations\",\"Version\":2},{\"DataMigrationClass\":\"OrchardCore.Html.Migrations\",\"Version\":4},{\"DataMigrationClass\":\"OrchardCore.Layers.Migrations\",\"Version\":1},{\"DataMigrationClass\":\"OrchardCore.Lists.Migrations\",\"Version\":1},{\"DataMigrationClass\":\"OrchardCore.Markdown.Migrations\",\"Version\":1},{\"DataMigrationClass\":\"OrchardCore.Title.Migrations\",\"Version\":2},{\"DataMigrationClass\":\"OrchardCore.Menu.Migrations\",\"Version\":1},{\"DataMigrationClass\":\"OrchardCore.Users.Migrations\",\"Version\":2}]}'),
-(41, 'OrchardCore.Roles.Models.RolesDocument, OrchardCore.Roles', '{\"Id\":41,\"Roles\":[{\"RoleName\":\"Moderator\",\"NormalizedRoleName\":\"MODERATOR\",\"RoleClaims\":[{\"ClaimType\":\"Permission\",\"ClaimValue\":\"AccessAdminPanel\"}]},{\"RoleName\":\"Authenticated\",\"NormalizedRoleName\":\"AUTHENTICATED\",\"RoleClaims\":[{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ViewContent\"}]},{\"RoleName\":\"Anonymous\",\"NormalizedRoleName\":\"ANONYMOUS\",\"RoleClaims\":[{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ViewContent\"}]},{\"RoleName\":\"Author\",\"NormalizedRoleName\":\"AUTHOR\",\"RoleClaims\":[{\"ClaimType\":\"Permission\",\"ClaimValue\":\"AccessAdminPanel\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"PublishOwnContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"EditOwnContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"DeleteOwnContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"PreviewOwnContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ManageOwnMedia\"}]},{\"RoleName\":\"Contributor\",\"NormalizedRoleName\":\"CONTRIBUTOR\",\"RoleClaims\":[{\"ClaimType\":\"Permission\",\"ClaimValue\":\"AccessAdminPanel\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"EditOwnContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"PreviewOwnContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ManageOwnMedia\"}]},{\"RoleName\":\"Editor\",\"NormalizedRoleName\":\"EDITOR\",\"RoleClaims\":[{\"ClaimType\":\"Permission\",\"ClaimValue\":\"AccessAdminPanel\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"PublishContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"EditContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"DeleteContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"PreviewContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ManageMediaContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ManageQueries\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ManageTemplates\"}]},{\"RoleName\":\"Administrator\",\"NormalizedRoleName\":\"ADMINISTRATOR\",\"RoleClaims\":[{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ManageSettings\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"AccessAdminPanel\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"PublishContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"EditContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"DeleteContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"PreviewContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ViewContentTypes\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"EditContentTypes\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"SetHomepage\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ContentPreview\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"Import\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"Export\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ManageLayers\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ManageMediaContent\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ManageMenu\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ManageQueries\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ManageUsers\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ManageRoles\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"AssignRoles\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"SiteOwner\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ManageTemplates\"},{\"ClaimType\":\"Permission\",\"ClaimValue\":\"ApplyTheme\"}]}],\"Serial\":50}'),
-(42, 'OrchardCore.Settings.SiteSettings, OrchardCore.Settings', '{\"Id\":42,\"BaseUrl\":null,\"Calendar\":null,\"Culture\":\"\",\"SupportedCultures\":[],\"MaxPagedCount\":0,\"MaxPageSize\":100,\"PageSize\":10,\"TimeZoneId\":\"America/Chicago\",\"ResourceDebugMode\":0,\"SiteName\":\"NetCMS\",\"SiteSalt\":\"9ff16b1cbb284326ace65ba1ef1b5f38\",\"SuperUser\":\"admin\",\"UseCdn\":false,\"HomeRoute\":{\"action\":\"Display\",\"controller\":\"Item\",\"area\":\"OrchardCore.Contents\",\"contentItemId\":\"4h7sq49zw10jtyras1100g694n\"},\"Properties\":{\"CurrentThemeName\":\"TheAgencyTheme\",\"CurrentAdminThemeName\":\"TheAdmin\",\"name\":\"settings\",\"LayerSettings\":{\"Zones\":[\"Footer\"]}}}'),
-(43, 'OrchardCore.ContentManagement.ContentItem, OrchardCore.ContentManagement.Abstractions', '{\"ContentItemId\":\"4z1be9j6ej9fmvqn0zyt9j2f5t\",\"ContentItemVersionId\":\"4yw56kjfn3zdwshzpa2dzkq7w3\",\"ContentType\":\"HtmlWidget\",\"DisplayText\":\"Footer\",\"Latest\":true,\"Published\":true,\"ModifiedUtc\":\"2019-05-02T16:06:02.962724Z\",\"PublishedUtc\":\"2019-05-02T16:06:02.976922Z\",\"CreatedUtc\":\"2019-05-02T16:06:02.976922Z\",\"Owner\":\"admin\",\"Author\":\"admin\",\"LayerMetadata\":{\"Layer\":\"Always\",\"Zone\":\"Footer\",\"RenderTitle\":false,\"Position\":10},\"HtmlWidget\":{\"Content\":{\"Html\":\"<!-- Footer -->\\n<footer>\\n    <div class=\\\"container\\\">\\n        <div class=\\\"row\\\">\\n            <div class=\\\"col-md-4\\\">\\n                <span class=\\\"copyright\\\">Copyright &copy; Your Website 2018</span>\\n            </div>\\n            <div class=\\\"col-md-4\\\">\\n                <ul class=\\\"list-inline social-buttons\\\">\\n                    <li class=\\\"list-inline-item\\\">\\n                        <a href=\\\"#\\\">\\n                            <i class=\\\"fab fa-twitter\\\"></i>\\n                        </a>\\n                    </li>\\n                    <li class=\\\"list-inline-item\\\">\\n                        <a href=\\\"#\\\">\\n                            <i class=\\\"fab fa-facebook\\\"></i>\\n                        </a>\\n                    </li>\\n                    <li class=\\\"list-inline-item\\\">\\n                        <a href=\\\"#\\\">\\n                            <i class=\\\"fab fa-linkedin\\\"></i>\\n                        </a>\\n                    </li>\\n                </ul>\\n            </div>\\n            <div class=\\\"col-md-4\\\">\\n                <ul class=\\\"list-inline quicklinks\\\">\\n                    <li class=\\\"list-inline-item\\\">\\n                        <a href=\\\"#\\\">Privacy Policy</a>\\n                    </li>\\n                    <li class=\\\"list-inline-item\\\">\\n                        <a href=\\\"#\\\">Terms of Use</a>\\n                    </li>\\n                </ul>\\n            </div>\\n        </div>\\n    </div>\\n</footer>\"}}}'),
-(44, 'OrchardCore.Layers.Models.LayersDocument, OrchardCore.Layers', '{\"Id\":44,\"Layers\":[{\"Name\":\"Always\",\"Rule\":\"true\",\"Description\":\"The widgets in this layer are displayed on any page of this site.\"},{\"Name\":\"Homepage\",\"Rule\":\"isHomepage()\",\"Description\":\"The widgets in this layer are only displayed on the homepage.\"}]}'),
-(45, 'OrchardCore.ContentManagement.ContentItem, OrchardCore.ContentManagement.Abstractions', '{\"ContentItemId\":\"4cy6ryt8t7jygwhad0v17jxjca\",\"ContentItemVersionId\":\"4wbv2t03ejqqexxhfvn2j6sfxv\",\"ContentType\":\"Menu\",\"DisplayText\":\"Main Menu\",\"Latest\":true,\"Published\":true,\"ModifiedUtc\":\"2019-05-02T16:06:03.093374Z\",\"PublishedUtc\":\"2019-05-02T16:06:03.099624Z\",\"CreatedUtc\":\"2019-05-02T16:06:03.099624Z\",\"Owner\":\"admin\",\"Author\":\"admin\",\"MenuPart\":{},\"TitlePart\":{\"Title\":\"Main Menu\"},\"MenuItemsListPart\":{\"MenuItems\":[{\"ContentType\":\"LinkMenuItem\",\"ContentItemId\":\"43t7be3ytv6z63g448jec2d257\",\"LinkMenuItemPart\":{\"Name\":\"Services\",\"Url\":\"~/#services\"}},{\"ContentType\":\"LinkMenuItem\",\"ContentItemId\":\"4qrms5ss12w977yq35j4brm1xp\",\"LinkMenuItemPart\":{\"Name\":\"Portfolio\",\"Url\":\"~/#portfolio\"}},{\"ContentType\":\"LinkMenuItem\",\"ContentItemId\":\"4yssmhpnabhwy40qfgc7hjmr5d\",\"LinkMenuItemPart\":{\"Name\":\"About\",\"Url\":\"~/#about\"}},{\"ContentType\":\"LinkMenuItem\",\"ContentItemId\":\"48skprhewkdv8sazsjp4cx6856\",\"LinkMenuItemPart\":{\"Name\":\"Team\",\"Url\":\"~/#team\"}},{\"ContentType\":\"LinkMenuItem\",\"ContentItemId\":\"4f4m3kw9w68jq2ajkxjqyejbma\",\"LinkMenuItemPart\":{\"Name\":\"Contact\",\"Url\":\"~/#contact\"}}]},\"AliasPart\":{\"Alias\":\"main-menu\"}}'),
-(46, 'OrchardCore.ContentManagement.ContentItem, OrchardCore.ContentManagement.Abstractions', '{\"ContentItemId\":\"4h7sq49zw10jtyras1100g694n\",\"ContentItemVersionId\":\"4p7xe8kvk8hn022gnjxyvpydmt\",\"ContentType\":\"LandingPage\",\"DisplayText\":\"NetCMS\",\"Latest\":true,\"Published\":true,\"ModifiedUtc\":\"2019-05-02T16:06:03.105062Z\",\"PublishedUtc\":\"2019-05-02T16:06:03.10803Z\",\"CreatedUtc\":\"2019-05-02T16:06:03.10803Z\",\"Owner\":\"admin\",\"Author\":\"admin\",\"LandingPage\":{},\"AutoroutePart\":{\"Path\":\"home-page\",\"SetHomepage\":true},\"TitlePart\":{\"Title\":\"NetCMS\"},\"Services\":{\"ContentItems\":[{\"ContentItemId\":\"4s6sh8vpp07c8wb31j9ng8ypmw\",\"ContentItemVersionId\":\"46nf8p8s1fqgw5jgbc9f7g42cc\",\"ContentType\":\"Service\",\"DisplayText\":\"E-Commerce\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Service\":{\"IconClass\":{\"Text\":\"fa-shopping-cart\"}},\"HtmlBodyPart\":{\"Html\":\"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.\"},\"TitlePart\":{\"Title\":\"E-Commerce\"}},{\"ContentItemId\":\"4djv0a5j9a6ghsg38agvn25hnv\",\"ContentItemVersionId\":\"46xddbn5a8v9hsh11d6g26w7wj\",\"ContentType\":\"Service\",\"DisplayText\":\"Responsive Design\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Service\":{\"IconClass\":{\"Text\":\"fa-laptop\"}},\"HtmlBodyPart\":{\"Html\":\"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.\"},\"TitlePart\":{\"Title\":\"Responsive Design\"}},{\"ContentItemId\":\"4ndzx7gs5h58d4y0zyehsxxm45\",\"ContentItemVersionId\":\"49k0vzftyynj0v36vcg9rz3tw5\",\"ContentType\":\"Service\",\"DisplayText\":\"Web Security\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Service\":{\"IconClass\":{\"Text\":\"fa-lock\"}},\"HtmlBodyPart\":{\"Html\":\"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.\"},\"TitlePart\":{\"Title\":\"Web Security\"}}]},\"Portfolio\":{\"ContentItems\":[{\"ContentItemId\":\"475prqf5fmncd31be6m4dg10x6\",\"ContentItemVersionId\":\"4c0kv2bqzx5bwwxk7p1dtm5x4n\",\"ContentType\":\"Project\",\"DisplayText\":\"Threads\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Project\":{\"Image\":{\"Paths\":[\"/portfolio/01-full.jpg\"]},\"Category\":{\"Text\":\"Illustrations\"}},\"HtmlBodyPart\":{\"Html\":\"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!\"},\"TitlePart\":{\"Title\":\"Threads\"}},{\"ContentItemId\":\"45jbhqstk5zsktmac17a8nksm9\",\"ContentItemVersionId\":\"4bzme57b3y7xc7vgyjygdf8a4m\",\"ContentType\":\"Project\",\"DisplayText\":\"Explore\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Project\":{\"Image\":{\"Paths\":[\"/portfolio/02-full.jpg\"]},\"Category\":{\"Text\":\"Graphic Design\"}},\"HtmlBodyPart\":{\"Html\":\"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!\"},\"TitlePart\":{\"Title\":\"Explore\"}},{\"ContentItemId\":\"47kcc5r9hxc4ew7j81r51c7kmx\",\"ContentItemVersionId\":\"4t92an915txp4ycy7kxsa13mw3\",\"ContentType\":\"Project\",\"DisplayText\":\"Finish\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Project\":{\"Image\":{\"Paths\":[\"/portfolio/03-full.jpg\"]},\"Category\":{\"Text\":\"Identity\"}},\"HtmlBodyPart\":{\"Html\":\"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!\"},\"TitlePart\":{\"Title\":\"Finish\"}},{\"ContentItemId\":\"4cszbyzxzty6s27xkn0r9vrfc9\",\"ContentItemVersionId\":\"4c9w10wsgj5583ce8y1hkces4j\",\"ContentType\":\"Project\",\"DisplayText\":\"Lines\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Project\":{\"Image\":{\"Paths\":[\"/portfolio/04-full.jpg\"]},\"Category\":{\"Text\":\"Branding\"}},\"HtmlBodyPart\":{\"Html\":\"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!\"},\"TitlePart\":{\"Title\":\"Lines\"}},{\"ContentItemId\":\"4k9jnzn25r0kvy4qkvqevxdywh\",\"ContentItemVersionId\":\"40npav4ev2p7b20500adyd51m3\",\"ContentType\":\"Project\",\"DisplayText\":\"Southwest\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Project\":{\"Image\":{\"Paths\":[\"/portfolio/05-full.jpg\"]},\"Category\":{\"Text\":\"Web Design\"}},\"HtmlBodyPart\":{\"Html\":\"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!\"},\"TitlePart\":{\"Title\":\"Southwest\"}},{\"ContentItemId\":\"4bfpjcjwnj3yktjnybycqygvc8\",\"ContentItemVersionId\":\"47hw2fbk7g3x5zbmcy7vfxwdwt\",\"ContentType\":\"Project\",\"DisplayText\":\"Window\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Project\":{\"Image\":{\"Paths\":[\"/portfolio/06-full.jpg\"]},\"Category\":{\"Text\":\"Photography\"}},\"HtmlBodyPart\":{\"Html\":\"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!\"},\"TitlePart\":{\"Title\":\"Window\"}}]},\"About\":{\"ContentItems\":[{\"ContentItemId\":\"4zgyftag1mqqe4k4bavtnpg0d6\",\"ContentItemVersionId\":\"4byecc5dkg06mzcd1c74mhstmn\",\"ContentType\":\"Milestone\",\"DisplayText\":\"Our Humble Beginnings\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Milestone\":{\"Date\":{\"Text\":\"2009-2011\"},\"Image\":{\"Paths\":[\"/about/1.jpg\"]}},\"HtmlBodyPart\":{\"Html\":\"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!\"},\"TitlePart\":{\"Title\":\"Our Humble Beginnings\"}},{\"ContentItemId\":\"4112aacarjwn83s9q0djwvd15b\",\"ContentItemVersionId\":\"4e2hzbjc3kms1sdmmb9w8t25c9\",\"ContentType\":\"Milestone\",\"DisplayText\":\"An Agency is Born\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Milestone\":{\"Date\":{\"Text\":\"MARCH 2011\"},\"Image\":{\"Paths\":[\"/about/2.jpg\"]}},\"HtmlBodyPart\":{\"Html\":\"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!\\r\\n\"},\"TitlePart\":{\"Title\":\"An Agency is Born\"}},{\"ContentItemId\":\"4bg9hpds3jgkz5xqsfagjsd4mv\",\"ContentItemVersionId\":\"440658442akzftch73xyj0nk4p\",\"ContentType\":\"Milestone\",\"DisplayText\":\"Transition to Full Service\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Milestone\":{\"Date\":{\"Text\":\"DECEMBER 2012\"},\"Image\":{\"Paths\":[\"/about/3.jpg\"]}},\"HtmlBodyPart\":{\"Html\":\"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!\"},\"TitlePart\":{\"Title\":\"Transition to Full Service\"}},{\"ContentItemId\":\"4a1zasw2g9f7fvrzah8ehv7p4k\",\"ContentItemVersionId\":\"45x84za4ar21mwxc3ywcc337m1\",\"ContentType\":\"Milestone\",\"DisplayText\":\"Phase Two Expansion\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Milestone\":{\"Date\":{\"Text\":\"JULY 2014\"},\"Image\":{\"Paths\":[\"/about/4.jpg\"]}},\"HtmlBodyPart\":{\"Html\":\"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!\\r\\n\"},\"TitlePart\":{\"Title\":\"Phase Two Expansion\"}}]},\"Team\":{\"ContentItems\":[{\"ContentItemId\":\"4xej84v702r8art137fjh80z5q\",\"ContentItemVersionId\":\"4npaqtb9fbsm2xaad5dhxa1tdm\",\"ContentType\":\"TeamMember\",\"DisplayText\":\"Kay Garland\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"TeamMember\":{\"Occupation\":{\"Text\":\"Lead Designer\"},\"Picture\":{\"Paths\":[\"/team/1.jpg\"]},\"Twitter\":{\"Text\":\"@BillGates\"},\"Facebook\":{\"Text\":\"BillGates\"},\"LinkedIn\":{\"Text\":\"williamhgates\"}},\"TitlePart\":{\"Title\":\"Kay Garland\"}},{\"ContentItemId\":\"47rybse5yxe2bzhq5jc4hw15nf\",\"ContentItemVersionId\":\"4d5ma1wk6dd1w46g5pfq824nwg\",\"ContentType\":\"TeamMember\",\"DisplayText\":\"Larry Parker\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"TeamMember\":{\"Occupation\":{\"Text\":\"Lead Marketer\"},\"Picture\":{\"Paths\":[\"/team/2.jpg\"]},\"Twitter\":{\"Text\":\"@BillGates\"},\"Facebook\":{\"Text\":\"BillGates\"},\"LinkedIn\":{\"Text\":\"williamhgates\"}},\"TitlePart\":{\"Title\":\"Larry Parker\"}},{\"ContentItemId\":\"4g2c2q7qn4ww8zp01xn80kfv4s\",\"ContentItemVersionId\":\"4p47bas9ysmbg00tb2f0bmp2xt\",\"ContentType\":\"TeamMember\",\"DisplayText\":\"Diana Pertersen\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"TeamMember\":{\"Occupation\":{\"Text\":\"Lead Developer\"},\"Picture\":{\"Paths\":[\"/team/3.jpg\"]},\"Twitter\":{\"Text\":\"@BillGates\"},\"Facebook\":{\"Text\":\"BillGates\"},\"LinkedIn\":{\"Text\":\"williamhgates\"}},\"TitlePart\":{\"Title\":\"Diana Pertersen\"}}]},\"Clients\":{\"ContentItems\":[{\"ContentItemId\":\"4vcknr3c4qr1xy7xjfmkqy5cm7\",\"ContentItemVersionId\":\"4zcvhj9t09tydt5v2wa5nd2bxe\",\"ContentType\":\"Client\",\"DisplayText\":\"Envato\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Client\":{\"Logo\":{\"Paths\":[\"/logos/envato.jpg\"]},\"Url\":{\"Text\":\"#\"}},\"TitlePart\":{\"Title\":\"Envato\"}},{\"ContentItemId\":\"4w5gyzg55dm6nxzss2cts43sdb\",\"ContentItemVersionId\":\"45015yfe8x99r74gf9bpfgz7wd\",\"ContentType\":\"Client\",\"DisplayText\":\"Design Moto\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Client\":{\"Logo\":{\"Paths\":[\"/logos/designmodo.jpg\"]},\"Url\":{\"Text\":\"#\"}},\"TitlePart\":{\"Title\":\"Design Moto\"}},{\"ContentItemId\":\"4vabagvcyawb87vw1nxxq6zaxa\",\"ContentItemVersionId\":\"4yecfe4yt7a47v2xyyepn9f048\",\"ContentType\":\"Client\",\"DisplayText\":\"ThemeForest\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Client\":{\"Logo\":{\"Paths\":[\"/logos/themeforest.jpg\"]},\"Url\":{\"Text\":\"#\"}},\"TitlePart\":{\"Title\":\"ThemeForest\"}},{\"ContentItemId\":\"4vg29h76e5sz5645gzq7r0myn6\",\"ContentItemVersionId\":\"4ndh46ddhvb1h3zazfghx432d4\",\"ContentType\":\"Client\",\"DisplayText\":\"Creative\",\"Latest\":false,\"Published\":false,\"Owner\":null,\"Author\":\"admin\",\"Client\":{\"Logo\":{\"Paths\":[\"/logos/creative-market.jpg\"]},\"Url\":{\"Text\":\"#\"}},\"TitlePart\":{\"Title\":\"Creative\"}}]}}'),
-(47, 'OrchardCore.Templates.Models.TemplatesDocument, OrchardCore.Templates', '{\"Id\":47,\"Templates\":{\"Content__LandingPage\":{\"Content\":\"{% zone \\\"Header\\\" %}\\n<!-- Header -->\\n<header class=\\\"masthead\\\">\\n    <div class=\\\"container\\\">\\n        <div class=\\\"intro-text\\\">\\n            <div class=\\\"intro-lead-in\\\">Welcome To Our Studio!</div>\\n            <div class=\\\"intro-heading text-uppercase\\\">It\'s Nice To Meet You</div>\\n            <a class=\\\"btn btn-primary btn-xl text-uppercase js-scroll-trigger\\\" href=\\\"#services\\\">Tell Me More</a>\\n        </div>\\n    </div>\\n</header>\\n{% endzone %}\\n\\n{% if Model.ContentItem.Content.Services.ContentItems.size > 0 %}\\n<!-- Services -->\\n<section id=\\\"services\\\">\\n    <div class=\\\"container\\\">\\n        <div class=\\\"row\\\">\\n            <div class=\\\"col-lg-12 text-center\\\">\\n                <h2 class=\\\"section-heading text-uppercase\\\">Services</h2>\\n                <h3 class=\\\"section-subheading text-muted\\\">Lorem ipsum dolor sit amet consectetur.</h3>\\n            </div>\\n        </div>\\n        <div class=\\\"row text-center\\\">\\n            {% for service in Model.ContentItem.Content.Services.ContentItems %}\\n            <div class=\\\"col-md-4\\\">\\n                <span class=\\\"fa-stack fa-4x\\\">\\n                    <i class=\\\"fas fa-circle fa-stack-2x text-primary\\\"></i>\\n                    <i class=\\\"fas {{ service.Service.IconClass.Text }} fa-stack-1x fa-inverse\\\"></i>\\n                </span>\\n                <h4 class=\\\"service-heading\\\">{{ service.DisplayText }}</h4>\\n                <p class=\\\"text-muted\\\">{{ service.HtmlBodyPart.Html | raw }}</p>\\n            </div>\\n            {% endfor %}\\n        </div>\\n    </div>\\n</section>\\n{% endif %}\\n\\n{% if Model.ContentItem.Content.Portfolio.ContentItems.size > 0 %}\\n<!-- Portfolio Grid -->\\n<section class=\\\"bg-light\\\" id=\\\"portfolio\\\">\\n    <div class=\\\"container\\\">\\n        <div class=\\\"row\\\">\\n            <div class=\\\"col-lg-12 text-center\\\">\\n                <h2 class=\\\"section-heading text-uppercase\\\">Portfolio</h2>\\n                <h3 class=\\\"section-subheading text-muted\\\">Lorem ipsum dolor sit amet consectetur.</h3>\\n            </div>\\n        </div>\\n        <div class=\\\"row\\\">\\n            {% for project in Model.ContentItem.Content.Portfolio.ContentItems %}\\n            <div class=\\\"col-md-4 col-sm-6 portfolio-item\\\">\\n                <div class=\\\"portfolio-link\\\" data-toggle=\\\"modal\\\" href=\\\"#portfolioModal{{ forloop.index }}\\\">\\n                    <div class=\\\"portfolio-hover\\\">\\n                        <div class=\\\"portfolio-hover-content\\\">\\n                            <i class=\\\"fas fa-plus fa-3x\\\"></i>\\n                        </div>\\n                    </div>\\n                    <img class=\\\"img-fluid\\\" src=\\\"{{ project.Project.Image.Paths.first | asset_url | resize_url: width:480, height: 480, mode: \'stretch\' }}\\\" alt=\\\"{{ project.DisplayText }}\\\">\\n                </div>\\n                <div class=\\\"portfolio-caption\\\">\\n                    <h4>{{ project.DisplayText }}</h4>\\n                    <p class=\\\"text-muted\\\">{{ project.Project.Category.Text }}</p>\\n                </div>\\n            </div>\\n            {% endfor %}\\n        </div>\\n    </div>\\n</section>\\n{% endif %}\\n\\n{% if Model.ContentItem.Content.About.ContentItems.size > 0 %}\\n<!-- About -->\\n<section id=\\\"about\\\">\\n    <div class=\\\"container\\\">\\n        <div class=\\\"row\\\">\\n            <div class=\\\"col-lg-12 text-center\\\">\\n                <h2 class=\\\"section-heading text-uppercase\\\">About</h2>\\n                <h3 class=\\\"section-subheading text-muted\\\">Lorem ipsum dolor sit amet consectetur.</h3>\\n            </div>\\n        </div>\\n        <div class=\\\"row\\\">\\n            <div class=\\\"col-lg-12\\\">\\n                <ul class=\\\"timeline\\\">\\n                    {% for milestone in Model.ContentItem.Content.About.ContentItems %}\\n                    <li class=\\\"{% cycle \'\', \'timeline-inverted\' %}\\\">\\n                        <div class=\\\"timeline-image\\\">\\n                            <img class=\\\"rounded-circle img-fluid\\\" src=\\\"{{ milestone.Milestone.Image.Paths.first | asset_url | resize_url: width:160, height: 160, mode: \'stretch\' }}\\\" alt=\\\"\\\">\\n                        </div>\\n                        <div class=\\\"timeline-panel\\\">\\n                            <div class=\\\"timeline-heading\\\">\\n                                <h4>{{ milestone.Milestone.Date.Text }}</h4>\\n                                <h4 class=\\\"subheading\\\">{{ milestone.DisplayText }}</h4>\\n                            </div>\\n                            <div class=\\\"timeline-body\\\">\\n                                <p class=\\\"text-muted\\\">{{ milestone.HtmlBodyPart.Html }}</p>\\n                            </div>\\n                        </div>\\n                    </li>\\n                    {% endfor %}\\n                    <li class=\\\"timeline-inverted\\\">\\n                        <div class=\\\"timeline-image\\\">\\n                            <h4>\\n                                Be Part\\n                                <br>Of Our\\n                                <br>Story!\\n                            </h4>\\n                        </div>\\n                    </li>\\n                </ul>\\n            </div>\\n        </div>\\n    </div>\\n</section>\\n{% endif %}\\n\\n{% if Model.ContentItem.Content.Team.ContentItems.size > 0 %}\\n<!-- Team -->\\n<section class=\\\"bg-light\\\" id=\\\"team\\\">\\n    <div class=\\\"container\\\">\\n        <div class=\\\"row\\\">\\n            <div class=\\\"col-lg-12 text-center\\\">\\n                <h2 class=\\\"section-heading text-uppercase\\\">Our Amazing Team</h2>\\n                <h3 class=\\\"section-subheading text-muted\\\">Lorem ipsum dolor sit amet consectetur.</h3>\\n            </div>\\n        </div>\\n        <div class=\\\"row\\\">\\n            {% for member in Model.ContentItem.Content.Team.ContentItems %}\\n            <div class=\\\"col-sm-4\\\">\\n                <div class=\\\"team-member\\\">\\n                    <img class=\\\"mx-auto rounded-circle\\\" src=\\\"{{ member.TeamMember.Picture.Paths.first | asset_url | resize_url: width:240, height: 240, mode: \'stretch\' }}\\\" alt=\\\"\\\">\\n                    <h4>{{ member.DisplayText }}</h4>\\n                    <p class=\\\"text-muted\\\">{{ member.TeamMember.Occupation.Text }}</p>\\n                    <ul class=\\\"list-inline social-buttons\\\">\\n                        {% if member.TeamMember.Twitter.Text.size > 0 %}\\n                        <li class=\\\"list-inline-item\\\">\\n                            <a href=\\\"https://www.twitter.com/{{ member.TeamMember.Twitter.Text }}\\\">\\n                                <i class=\\\"fab fa-twitter\\\"></i>\\n                            </a>\\n                        </li>\\n                        {% endif %}\\n                        {% if member.TeamMember.Facebook.Text.size > 0 %}\\n                        <li class=\\\"list-inline-item\\\">\\n                            <a href=\\\"https://www.facebook.com/{{ member.TeamMember.Facebook.Text }}\\\">\\n                                <i class=\\\"fab fa-facebook\\\"></i>\\n                            </a>\\n                        </li>\\n                        {% endif %}\\n                        {% if member.TeamMember.LinkedIn.Text.size > 0 %}\\n                        <li class=\\\"list-inline-item\\\">\\n                            <a href=\\\"https://www.linkedin.com/in/{{ member.TeamMember.LinkedIn.Text }}\\\">\\n                                <i class=\\\"fab fa-linkedin\\\"></i>\\n                            </a>\\n                        </li>\\n                        {% endif %}\\n                    </ul>\\n                </div>\\n            </div>\\n            {% endfor %}\\n        </div>\\n        <div class=\\\"row\\\">\\n            <div class=\\\"col-lg-8 mx-auto text-center\\\">\\n                <p class=\\\"large text-muted\\\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>\\n            </div>\\n        </div>\\n    </div>\\n</section>\\n{% endif %}\\n\\n{% if Model.ContentItem.Content.Clients.ContentItems.size > 0 %}\\n<!-- Clients -->\\n<section class=\\\"py-5\\\">\\n    <div class=\\\"container\\\">\\n        <div class=\\\"row\\\">\\n            {% for client in Model.ContentItem.Content.Clients.ContentItems %}\\n            <div class=\\\"col-md-3 col-sm-6\\\">\\n                <a href=\\\"{{ client.Client.Url.Text }}\\\">\\n                    <img class=\\\"img-fluid d-block mx-auto\\\" src=\\\"{{ client.Client.Logo.Paths.first | asset_url }}\\\" alt=\\\"\\\">\\n                </a>\\n            </div>\\n            {% endfor %}\\n        </div>\\n    </div>\\n</section>\\n{% endif %}\\n\\n<!-- Contact -->\\n<section id=\\\"contact\\\">\\n    <div class=\\\"container\\\">\\n        <div class=\\\"row\\\">\\n            <div class=\\\"col-lg-12 text-center\\\">\\n                <h2 class=\\\"section-heading text-uppercase\\\">Contact Us</h2>\\n                <h3 class=\\\"section-subheading text-muted\\\">Lorem ipsum dolor sit amet consectetur.</h3>\\n            </div>\\n        </div>\\n        <div class=\\\"row\\\">\\n            <div class=\\\"col-lg-12\\\">\\n                <form id=\\\"contactForm\\\" name=\\\"sentMessage\\\" novalidate>\\n                    <div class=\\\"row\\\">\\n                        <div class=\\\"col-md-6\\\">\\n                            <div class=\\\"form-group\\\">\\n                                <input class=\\\"form-control\\\" id=\\\"name\\\" type=\\\"text\\\" placeholder=\\\"Your Name *\\\" required data-validation-required-message=\\\"Please enter your name.\\\">\\n                                <p class=\\\"help-block text-danger\\\"></p>\\n                            </div>\\n                            <div class=\\\"form-group\\\">\\n                                <input class=\\\"form-control\\\" id=\\\"email\\\" type=\\\"email\\\" placeholder=\\\"Your Email *\\\" required data-validation-required-message=\\\"Please enter your email address.\\\">\\n                                <p class=\\\"help-block text-danger\\\"></p>\\n                            </div>\\n                            <div class=\\\"form-group\\\">\\n                                <input class=\\\"form-control\\\" id=\\\"phone\\\" type=\\\"tel\\\" placeholder=\\\"Your Phone *\\\" required data-validation-required-message=\\\"Please enter your phone number.\\\">\\n                                <p class=\\\"help-block text-danger\\\"></p>\\n                            </div>\\n                        </div>\\n                        <div class=\\\"col-md-6\\\">\\n                            <div class=\\\"form-group\\\">\\n                                <textarea class=\\\"form-control\\\" id=\\\"message\\\" placeholder=\\\"Your Message *\\\" required data-validation-required-message=\\\"Please enter a message.\\\"></textarea>\\n                                <p class=\\\"help-block text-danger\\\"></p>\\n                            </div>\\n                        </div>\\n                        <div class=\\\"clearfix\\\"></div>\\n                        <div class=\\\"col-lg-12 text-center\\\">\\n                            <div id=\\\"success\\\"></div>\\n                            <button id=\\\"sendMessageButton\\\" class=\\\"btn btn-primary btn-xl text-uppercase\\\" type=\\\"submit\\\">Send Message</button>\\n                        </div>\\n                    </div>\\n                </form>\\n            </div>\\n        </div>\\n    </div>\\n</section>\\n\\n<!-- Modals -->\\n{% for project in Model.ContentItem.Content.Portfolio.ContentItems %}\\n<div class=\\\"portfolio-modal modal fade\\\" id=\\\"portfolioModal{{ forloop.index }}\\\" tabindex=\\\"-1\\\" role=\\\"dialog\\\" aria-hidden=\\\"true\\\">\\n    <div class=\\\"modal-dialog\\\">\\n        <div class=\\\"modal-content\\\">\\n            <div class=\\\"close-modal\\\" data-dismiss=\\\"modal\\\">\\n                <div class=\\\"lr\\\">\\n                    <div class=\\\"rl\\\"></div>\\n                </div>\\n            </div>\\n            <div class=\\\"container\\\">\\n                <div class=\\\"row\\\">\\n                    <div class=\\\"col-lg-8 mx-auto\\\">\\n                        <div class=\\\"modal-body\\\">\\n                            <!-- Project Details Go Here -->\\n                            <h2 class=\\\"text-uppercase\\\">{{ project.DisplayText }}</h2>\\n                            <p class=\\\"item-intro text-muted\\\">{{ project.Project.Category.Text }}</p>\\n                            <img class=\\\"img-fluid d-block mx-auto\\\" src=\\\"{{ project.Project.Image.Paths.first | asset_url | resize_url: width:480, height: 480, mode: \'max\' }}\\\" alt=\\\"{{ project.DisplayText }}\\\">\\n                            <p>{{ project.HtmlBodyPart.Html | raw }}</p>\\n                            {% comment %}\\n                            <ul class=\\\"list-inline\\\">\\n                                <li>Date: January 2017</li>\\n                                <li>Client: Threads</li>\\n                                <li>Category: Illustration</li>\\n                            </ul>\\n                            {% endcomment %}\\n                            <button class=\\\"btn btn-primary\\\" data-dismiss=\\\"modal\\\" type=\\\"button\\\">\\n                                <i class=\\\"fa fa-times\\\"></i>\\n                                Close Project\\n                            </button>\\n                        </div>\\n                    </div>\\n                </div>\\n            </div>\\n        </div>\\n    </div>\\n</div>\\n{% endfor %}\",\"Description\":\"A template for the Landing Page content type\"}}}'),
-(61, 'OrchardCore.Users.Models.User, OrchardCore.Users.Core', '{\"Id\":61,\"UserName\":\"admin\",\"NormalizedUserName\":\"ADMIN\",\"Email\":\"admin@admin.com\",\"NormalizedEmail\":\"ADMIN@ADMIN.COM\",\"PasswordHash\":\"AQAAAAEAACcQAAAAEMQ2OmcaWQvknPqU/S2bj63QBPFEUcJFusHtyUHtpQc+kgfVnJ33cFGlHDHsY3WZPA==\",\"SecurityStamp\":\"7YLZHKPOVYQ6WBINOQZKS22OCDMNS5SQ\",\"EmailConfirmed\":true,\"ResetToken\":null,\"RoleNames\":{\"$type\":\"System.String[], System.Private.CoreLib\",\"$values\":[\"Administrator\"]},\"LoginInfos\":[],\"Properties\":{}}');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cms__Identifiers`
---
-
-CREATE TABLE `cms__Identifiers` (
-  `dimension` varchar(255) NOT NULL,
-  `nextval` bigint(20) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `cms__Identifiers`
---
-
-INSERT INTO `cms__Identifiers` (`dimension`, `nextval`) VALUES
-('', 81);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cms__LayerMetadataIndex`
---
-
-CREATE TABLE `cms__LayerMetadataIndex` (
-  `Id` int(11) NOT NULL,
-  `DocumentId` int(11) DEFAULT NULL,
-  `Zone` varchar(64) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `cms__LayerMetadataIndex`
---
-
-INSERT INTO `cms__LayerMetadataIndex` (`Id`, `DocumentId`, `Zone`) VALUES
-(1, 43, 'Footer');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cms__UserByLoginInfoIndex`
---
-
-CREATE TABLE `cms__UserByLoginInfoIndex` (
-  `Id` int(11) NOT NULL,
-  `DocumentId` int(11) DEFAULT NULL,
-  `LoginProvider` varchar(255) DEFAULT NULL,
-  `ProviderKey` varchar(255) DEFAULT NULL
+CREATE TABLE `cms_ef_identity_user_token_1` (
+  `UserId` bigint(20) NOT NULL,
+  `LoginProvider` varchar(127) NOT NULL,
+  `Name` varchar(127) NOT NULL,
+  `Value` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cms__UserByRoleNameIndex`
+-- Table structure for table `cms_ef_migration_history`
 --
 
-CREATE TABLE `cms__UserByRoleNameIndex` (
-  `Id` int(11) NOT NULL,
-  `RoleName` varchar(255) DEFAULT NULL,
-  `Count` int(11) DEFAULT NULL
+CREATE TABLE `cms_ef_migration_history` (
+  `MigrationId` varchar(95) NOT NULL,
+  `ProductVersion` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `cms__UserByRoleNameIndex`
+-- Dumping data for table `cms_ef_migration_history`
 --
 
-INSERT INTO `cms__UserByRoleNameIndex` (`Id`, `RoleName`, `Count`) VALUES
-(1, 'ADMINISTRATOR', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cms__UserByRoleNameIndex_Document`
---
-
-CREATE TABLE `cms__UserByRoleNameIndex_Document` (
-  `UserByRoleNameIndexId` int(11) NOT NULL,
-  `DocumentId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `cms__UserByRoleNameIndex_Document`
---
-
-INSERT INTO `cms__UserByRoleNameIndex_Document` (`UserByRoleNameIndexId`, `DocumentId`) VALUES
-(1, 61);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cms__UserIndex`
---
-
-CREATE TABLE `cms__UserIndex` (
-  `Id` int(11) NOT NULL,
-  `DocumentId` int(11) DEFAULT NULL,
-  `NormalizedUserName` varchar(255) DEFAULT NULL,
-  `NormalizedEmail` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `cms__UserIndex`
---
-
-INSERT INTO `cms__UserIndex` (`Id`, `DocumentId`, `NormalizedUserName`, `NormalizedEmail`) VALUES
-(1, 61, 'ADMIN', 'ADMIN@ADMIN.COM');
+INSERT INTO `cms_ef_migration_history` (`MigrationId`, `ProductVersion`) VALUES
+('20171205132842_InitMySql', '2.0.1-rtm-125');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `cms__AliasPartIndex`
+-- Indexes for table `cms_core_ncc_category`
 --
-ALTER TABLE `cms__AliasPartIndex`
+ALTER TABLE `cms_core_ncc_category`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `cms__FK_AliasPartIndex` (`DocumentId`),
-  ADD KEY `IDX_AliasPartIndex_Alias` (`Alias`);
+  ADD KEY `IX_cms_core_ncc_category_ParentId` (`ParentId`);
 
 --
--- Indexes for table `cms__AutoroutePartIndex`
+-- Indexes for table `cms_core_ncc_category_details`
 --
-ALTER TABLE `cms__AutoroutePartIndex`
+ALTER TABLE `cms_core_ncc_category_details`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `cms__FK_AutoroutePartIndex` (`DocumentId`),
-  ADD KEY `IDX_AutoroutePartIndex_ContentItemId` (`ContentItemId`);
+  ADD KEY `IX_cms_core_ncc_category_details_CategoryId` (`CategoryId`);
 
 --
--- Indexes for table `cms__ContainedPartIndex`
+-- Indexes for table `cms_core_ncc_comment`
 --
-ALTER TABLE `cms__ContainedPartIndex`
+ALTER TABLE `cms_core_ncc_comment`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `cms__FK_ContainedPartIndex` (`DocumentId`),
-  ADD KEY `IDX_ContainedPartIndex_ListContentItemId` (`ListContentItemId`);
+  ADD KEY `IX_cms_core_ncc_comment_AuthorId` (`AuthorId`),
+  ADD KEY `IX_cms_core_ncc_comment_PostId` (`PostId`);
 
 --
--- Indexes for table `cms__ContentItemIndex`
+-- Indexes for table `cms_core_ncc_menu`
 --
-ALTER TABLE `cms__ContentItemIndex`
-  ADD PRIMARY KEY (`Id`),
-  ADD KEY `cms__FK_ContentItemIndex` (`DocumentId`),
-  ADD KEY `IDX_ContentItemIndex_ContentItemId` (`ContentItemId`,`Latest`,`Published`,`CreatedUtc`),
-  ADD KEY `IDX_ContentItemIndex_ContentItemVersionId` (`ContentItemVersionId`),
-  ADD KEY `IDX_ContentItemIndex_DisplayText` (`DisplayText`);
-
---
--- Indexes for table `cms__DeploymentPlanIndex`
---
-ALTER TABLE `cms__DeploymentPlanIndex`
-  ADD PRIMARY KEY (`Id`),
-  ADD KEY `cms__FK_DeploymentPlanIndex` (`DocumentId`);
-
---
--- Indexes for table `cms__Document`
---
-ALTER TABLE `cms__Document`
-  ADD PRIMARY KEY (`Id`),
-  ADD KEY `IX_Document_Type` (`Type`);
-
---
--- Indexes for table `cms__Identifiers`
---
-ALTER TABLE `cms__Identifiers`
-  ADD PRIMARY KEY (`dimension`),
-  ADD KEY `IX_Dimension` (`dimension`);
-
---
--- Indexes for table `cms__LayerMetadataIndex`
---
-ALTER TABLE `cms__LayerMetadataIndex`
-  ADD PRIMARY KEY (`Id`),
-  ADD KEY `cms__FK_LayerMetadataIndex` (`DocumentId`);
-
---
--- Indexes for table `cms__UserByLoginInfoIndex`
---
-ALTER TABLE `cms__UserByLoginInfoIndex`
-  ADD PRIMARY KEY (`Id`),
-  ADD KEY `cms__FK_UserByLoginInfoIndex` (`DocumentId`);
-
---
--- Indexes for table `cms__UserByRoleNameIndex`
---
-ALTER TABLE `cms__UserByRoleNameIndex`
+ALTER TABLE `cms_core_ncc_menu`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `cms__UserByRoleNameIndex_Document`
+-- Indexes for table `cms_core_ncc_menu_item`
 --
-ALTER TABLE `cms__UserByRoleNameIndex_Document`
-  ADD KEY `cms__FK_UserByRoleNameIndex_Document_Id` (`UserByRoleNameIndexId`),
-  ADD KEY `cms__FK_UserByRoleNameIndex_Document_DocumentId` (`DocumentId`);
+ALTER TABLE `cms_core_ncc_menu_item`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_cms_core_ncc_menu_item_NccMenuId` (`NccMenuId`),
+  ADD KEY `IX_cms_core_ncc_menu_item_NccMenuItemId` (`NccMenuItemId`),
+  ADD KEY `IX_cms_core_ncc_menu_item_NccMenuItemId1` (`NccMenuItemId1`),
+  ADD KEY `IX_cms_core_ncc_menu_item_ParentId` (`ParentId`);
 
 --
--- Indexes for table `cms__UserIndex`
+-- Indexes for table `cms_core_ncc_module`
 --
-ALTER TABLE `cms__UserIndex`
+ALTER TABLE `cms_core_ncc_module`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `cms_core_ncc_module_dependency`
+--
+ALTER TABLE `cms_core_ncc_module_dependency`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `cms__FK_UserIndex` (`DocumentId`);
+  ADD KEY `IX_cms_core_ncc_module_dependency_NccModuleId` (`NccModuleId`);
+
+--
+-- Indexes for table `cms_core_ncc_page`
+--
+ALTER TABLE `cms_core_ncc_page`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_cms_core_ncc_page_ParentId` (`ParentId`);
+
+--
+-- Indexes for table `cms_core_ncc_page_details`
+--
+ALTER TABLE `cms_core_ncc_page_details`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_cms_core_ncc_page_details_PageId` (`PageId`);
+
+--
+-- Indexes for table `cms_core_ncc_page_details_history`
+--
+ALTER TABLE `cms_core_ncc_page_details_history`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_cms_core_ncc_page_details_history_PageHistoryId` (`PageHistoryId`);
+
+--
+-- Indexes for table `cms_core_ncc_page_history`
+--
+ALTER TABLE `cms_core_ncc_page_history`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_cms_core_ncc_page_history_ParentId` (`ParentId`);
+
+--
+-- Indexes for table `cms_core_ncc_permission`
+--
+ALTER TABLE `cms_core_ncc_permission`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `cms_core_ncc_permission_details`
+--
+ALTER TABLE `cms_core_ncc_permission_details`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_cms_core_ncc_permission_details_ExtraAllowUserId` (`ExtraAllowUserId`),
+  ADD KEY `IX_cms_core_ncc_permission_details_ExtraDenyUserId` (`ExtraDenyUserId`),
+  ADD KEY `IX_cms_core_ncc_permission_details_PermissionId` (`PermissionId`);
+
+--
+-- Indexes for table `cms_core_ncc_plugins`
+--
+ALTER TABLE `cms_core_ncc_plugins`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `cms_core_ncc_post`
+--
+ALTER TABLE `cms_core_ncc_post`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_cms_core_ncc_post_AuthorId` (`AuthorId`),
+  ADD KEY `IX_cms_core_ncc_post_ParentId` (`ParentId`);
+
+--
+-- Indexes for table `cms_core_ncc_post_category`
+--
+ALTER TABLE `cms_core_ncc_post_category`
+  ADD PRIMARY KEY (`PostId`,`CategoryId`),
+  ADD KEY `IX_cms_core_ncc_post_category_CategoryId` (`CategoryId`);
+
+--
+-- Indexes for table `cms_core_ncc_post_details`
+--
+ALTER TABLE `cms_core_ncc_post_details`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_cms_core_ncc_post_details_PostId` (`PostId`);
+
+--
+-- Indexes for table `cms_core_ncc_post_tag`
+--
+ALTER TABLE `cms_core_ncc_post_tag`
+  ADD PRIMARY KEY (`PostId`,`TagId`),
+  ADD KEY `IX_cms_core_ncc_post_tag_TagId` (`TagId`);
+
+--
+-- Indexes for table `cms_core_ncc_role`
+--
+ALTER TABLE `cms_core_ncc_role`
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `IX_cms_core_ncc_role_RoleNameIndex` (`NormalizedName`);
+
+--
+-- Indexes for table `cms_core_ncc_schedule_task_history`
+--
+ALTER TABLE `cms_core_ncc_schedule_task_history`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `cms_core_ncc_settings`
+--
+ALTER TABLE `cms_core_ncc_settings`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `cms_core_ncc_startup`
+--
+ALTER TABLE `cms_core_ncc_startup`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_cms_core_ncc_startup_PermissionId` (`PermissionId`);
+
+--
+-- Indexes for table `cms_core_ncc_tag`
+--
+ALTER TABLE `cms_core_ncc_tag`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `cms_core_ncc_user`
+--
+ALTER TABLE `cms_core_ncc_user`
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `IX_cms_core_ncc_user_UserNameIndex` (`NormalizedUserName`),
+  ADD KEY `IX_cms_core_ncc_user_EmailIndex` (`NormalizedEmail`);
+
+--
+-- Indexes for table `cms_core_ncc_user_permission`
+--
+ALTER TABLE `cms_core_ncc_user_permission`
+  ADD PRIMARY KEY (`UserId`,`PermissionId`),
+  ADD KEY `IX_cms_core_ncc_user_permission_PermissionId` (`PermissionId`);
+
+--
+-- Indexes for table `cms_core_ncc_user_role`
+--
+ALTER TABLE `cms_core_ncc_user_role`
+  ADD PRIMARY KEY (`UserId`,`RoleId`),
+  ADD KEY `IX_cms_core_ncc_user_role_RoleId` (`RoleId`);
+
+--
+-- Indexes for table `cms_core_ncc_web_site`
+--
+ALTER TABLE `cms_core_ncc_web_site`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `cms_core_ncc_web_site_info`
+--
+ALTER TABLE `cms_core_ncc_web_site_info`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_cms_core_ncc_web_site_info_NccWebSiteId` (`NccWebSiteId`);
+
+--
+-- Indexes for table `cms_core_ncc_web_site_widget`
+--
+ALTER TABLE `cms_core_ncc_web_site_widget`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_cms_core_ncc_web_site_widget_WebSiteId` (`WebSiteId`);
+
+--
+-- Indexes for table `cms_core_ncc_widget`
+--
+ALTER TABLE `cms_core_ncc_widget`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_cms_core_ncc_widget_NccPluginsId` (`NccPluginsId`);
+
+--
+-- Indexes for table `cms_core_ncc_widget_section`
+--
+ALTER TABLE `cms_core_ncc_widget_section`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `cms_ef_identity_role_claim_1`
+--
+ALTER TABLE `cms_ef_identity_role_claim_1`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_cms_ef_identity_role_claim_1_RoleId` (`RoleId`);
+
+--
+-- Indexes for table `cms_ef_identity_user_claim_1`
+--
+ALTER TABLE `cms_ef_identity_user_claim_1`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_cms_ef_identity_user_claim_1_NccUserId` (`NccUserId`),
+  ADD KEY `IX_cms_ef_identity_user_claim_1_UserId` (`UserId`);
+
+--
+-- Indexes for table `cms_ef_identity_user_login_1`
+--
+ALTER TABLE `cms_ef_identity_user_login_1`
+  ADD PRIMARY KEY (`LoginProvider`,`ProviderKey`),
+  ADD KEY `IX_cms_ef_identity_user_login_1_NccUserId` (`NccUserId`),
+  ADD KEY `IX_cms_ef_identity_user_login_1_UserId` (`UserId`);
+
+--
+-- Indexes for table `cms_ef_identity_user_token_1`
+--
+ALTER TABLE `cms_ef_identity_user_token_1`
+  ADD PRIMARY KEY (`UserId`,`LoginProvider`,`Name`);
+
+--
+-- Indexes for table `cms_ef_migration_history`
+--
+ALTER TABLE `cms_ef_migration_history`
+  ADD PRIMARY KEY (`MigrationId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `cms__AliasPartIndex`
+-- AUTO_INCREMENT for table `cms_core_ncc_category`
 --
-ALTER TABLE `cms__AliasPartIndex`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `cms_core_ncc_category`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `cms__AutoroutePartIndex`
+-- AUTO_INCREMENT for table `cms_core_ncc_category_details`
 --
-ALTER TABLE `cms__AutoroutePartIndex`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `cms_core_ncc_category_details`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `cms__ContainedPartIndex`
+-- AUTO_INCREMENT for table `cms_core_ncc_comment`
 --
-ALTER TABLE `cms__ContainedPartIndex`
+ALTER TABLE `cms_core_ncc_comment`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_menu`
+--
+ALTER TABLE `cms_core_ncc_menu`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_menu_item`
+--
+ALTER TABLE `cms_core_ncc_menu_item`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_module`
+--
+ALTER TABLE `cms_core_ncc_module`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_module_dependency`
+--
+ALTER TABLE `cms_core_ncc_module_dependency`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_page`
+--
+ALTER TABLE `cms_core_ncc_page`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_page_details`
+--
+ALTER TABLE `cms_core_ncc_page_details`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_page_details_history`
+--
+ALTER TABLE `cms_core_ncc_page_details_history`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_page_history`
+--
+ALTER TABLE `cms_core_ncc_page_history`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_permission`
+--
+ALTER TABLE `cms_core_ncc_permission`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_permission_details`
+--
+ALTER TABLE `cms_core_ncc_permission_details`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_plugins`
+--
+ALTER TABLE `cms_core_ncc_plugins`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_post`
+--
+ALTER TABLE `cms_core_ncc_post`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_post_details`
+--
+ALTER TABLE `cms_core_ncc_post_details`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_role`
+--
+ALTER TABLE `cms_core_ncc_role`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_schedule_task_history`
+--
+ALTER TABLE `cms_core_ncc_schedule_task_history`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_settings`
+--
+ALTER TABLE `cms_core_ncc_settings`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_startup`
+--
+ALTER TABLE `cms_core_ncc_startup`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_tag`
+--
+ALTER TABLE `cms_core_ncc_tag`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_user`
+--
+ALTER TABLE `cms_core_ncc_user`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_web_site`
+--
+ALTER TABLE `cms_core_ncc_web_site`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_web_site_info`
+--
+ALTER TABLE `cms_core_ncc_web_site_info`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_web_site_widget`
+--
+ALTER TABLE `cms_core_ncc_web_site_widget`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_widget`
+--
+ALTER TABLE `cms_core_ncc_widget`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cms_core_ncc_widget_section`
+--
+ALTER TABLE `cms_core_ncc_widget_section`
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cms_ef_identity_role_claim_1`
+--
+ALTER TABLE `cms_ef_identity_role_claim_1`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `cms__ContentItemIndex`
+-- AUTO_INCREMENT for table `cms_ef_identity_user_claim_1`
 --
-ALTER TABLE `cms__ContentItemIndex`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `cms__DeploymentPlanIndex`
---
-ALTER TABLE `cms__DeploymentPlanIndex`
+ALTER TABLE `cms_ef_identity_user_claim_1`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `cms__LayerMetadataIndex`
---
-ALTER TABLE `cms__LayerMetadataIndex`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `cms__UserByLoginInfoIndex`
---
-ALTER TABLE `cms__UserByLoginInfoIndex`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `cms__UserByRoleNameIndex`
---
-ALTER TABLE `cms__UserByRoleNameIndex`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `cms__UserIndex`
---
-ALTER TABLE `cms__UserIndex`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `cms__AliasPartIndex`
+-- Constraints for table `cms_core_ncc_category`
 --
-ALTER TABLE `cms__AliasPartIndex`
-  ADD CONSTRAINT `cms__FK_AliasPartIndex` FOREIGN KEY (`DocumentId`) REFERENCES `cms__Document` (`Id`);
+ALTER TABLE `cms_core_ncc_category`
+  ADD CONSTRAINT `FK_cms_core_ncc_category_cms_core_ncc_category_ParentId` FOREIGN KEY (`ParentId`) REFERENCES `cms_core_ncc_category` (`Id`) ON DELETE NO ACTION;
 
 --
--- Constraints for table `cms__AutoroutePartIndex`
+-- Constraints for table `cms_core_ncc_category_details`
 --
-ALTER TABLE `cms__AutoroutePartIndex`
-  ADD CONSTRAINT `cms__FK_AutoroutePartIndex` FOREIGN KEY (`DocumentId`) REFERENCES `cms__Document` (`Id`);
+ALTER TABLE `cms_core_ncc_category_details`
+  ADD CONSTRAINT `FK_cms_core_ncc_category_details_cms_core_ncc_category_details_C` FOREIGN KEY (`CategoryId`) REFERENCES `cms_core_ncc_category_details` (`Id`) ON DELETE NO ACTION;
 
 --
--- Constraints for table `cms__ContainedPartIndex`
+-- Constraints for table `cms_core_ncc_comment`
 --
-ALTER TABLE `cms__ContainedPartIndex`
-  ADD CONSTRAINT `cms__FK_ContainedPartIndex` FOREIGN KEY (`DocumentId`) REFERENCES `cms__Document` (`Id`);
+ALTER TABLE `cms_core_ncc_comment`
+  ADD CONSTRAINT `FK_cms_core_ncc_comment_cms_core_ncc_post_PostId` FOREIGN KEY (`PostId`) REFERENCES `cms_core_ncc_post` (`Id`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `FK_cms_core_ncc_comment_cms_core_ncc_user_AuthorId` FOREIGN KEY (`AuthorId`) REFERENCES `cms_core_ncc_user` (`Id`) ON DELETE NO ACTION;
 
 --
--- Constraints for table `cms__ContentItemIndex`
+-- Constraints for table `cms_core_ncc_menu_item`
 --
-ALTER TABLE `cms__ContentItemIndex`
-  ADD CONSTRAINT `cms__FK_ContentItemIndex` FOREIGN KEY (`DocumentId`) REFERENCES `cms__Document` (`Id`);
+ALTER TABLE `cms_core_ncc_menu_item`
+  ADD CONSTRAINT `FK_cms_core_ncc_menu_item_cms_core_ncc_menu_NccMenuId` FOREIGN KEY (`NccMenuId`) REFERENCES `cms_core_ncc_menu` (`Id`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `FK_cms_core_ncc_menu_item_cms_core_ncc_menu_item_NMIId` FOREIGN KEY (`NccMenuItemId`) REFERENCES `cms_core_ncc_menu_item` (`Id`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `FK_cms_core_ncc_menu_item_cms_core_ncc_menu_item_NMItemId1` FOREIGN KEY (`NccMenuItemId1`) REFERENCES `cms_core_ncc_menu_item` (`Id`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `FK_cms_core_ncc_menu_item_cms_core_ncc_menu_item_ParentId` FOREIGN KEY (`ParentId`) REFERENCES `cms_core_ncc_menu_item` (`Id`) ON DELETE NO ACTION;
 
 --
--- Constraints for table `cms__DeploymentPlanIndex`
+-- Constraints for table `cms_core_ncc_module_dependency`
 --
-ALTER TABLE `cms__DeploymentPlanIndex`
-  ADD CONSTRAINT `cms__FK_DeploymentPlanIndex` FOREIGN KEY (`DocumentId`) REFERENCES `cms__Document` (`Id`);
+ALTER TABLE `cms_core_ncc_module_dependency`
+  ADD CONSTRAINT `FK_cms_core_ncc_module_dependency_cms_core_ncc_module_NccModuleI` FOREIGN KEY (`NccModuleId`) REFERENCES `cms_core_ncc_module` (`Id`) ON DELETE NO ACTION;
 
 --
--- Constraints for table `cms__LayerMetadataIndex`
+-- Constraints for table `cms_core_ncc_page`
 --
-ALTER TABLE `cms__LayerMetadataIndex`
-  ADD CONSTRAINT `cms__FK_LayerMetadataIndex` FOREIGN KEY (`DocumentId`) REFERENCES `cms__Document` (`Id`);
+ALTER TABLE `cms_core_ncc_page`
+  ADD CONSTRAINT `FK_cms_core_ncc_page_cms_core_ncc_page_ParentId` FOREIGN KEY (`ParentId`) REFERENCES `cms_core_ncc_page` (`Id`) ON DELETE NO ACTION;
 
 --
--- Constraints for table `cms__UserByLoginInfoIndex`
+-- Constraints for table `cms_core_ncc_page_details`
 --
-ALTER TABLE `cms__UserByLoginInfoIndex`
-  ADD CONSTRAINT `cms__FK_UserByLoginInfoIndex` FOREIGN KEY (`DocumentId`) REFERENCES `cms__Document` (`Id`);
+ALTER TABLE `cms_core_ncc_page_details`
+  ADD CONSTRAINT `FK_cms_core_ncc_page_details_cms_core_ncc_page_PageId` FOREIGN KEY (`PageId`) REFERENCES `cms_core_ncc_page` (`Id`) ON DELETE NO ACTION;
 
 --
--- Constraints for table `cms__UserByRoleNameIndex_Document`
+-- Constraints for table `cms_core_ncc_page_details_history`
 --
-ALTER TABLE `cms__UserByRoleNameIndex_Document`
-  ADD CONSTRAINT `cms__FK_UserByRoleNameIndex_Document_DocumentId` FOREIGN KEY (`DocumentId`) REFERENCES `cms__Document` (`Id`),
-  ADD CONSTRAINT `cms__FK_UserByRoleNameIndex_Document_Id` FOREIGN KEY (`UserByRoleNameIndexId`) REFERENCES `cms__UserByRoleNameIndex` (`Id`);
+ALTER TABLE `cms_core_ncc_page_details_history`
+  ADD CONSTRAINT `FK_cms_core_ncc_page_details_history_cms_core_ncc_page_details_h` FOREIGN KEY (`PageHistoryId`) REFERENCES `cms_core_ncc_page_details_history` (`Id`) ON DELETE NO ACTION;
 
 --
--- Constraints for table `cms__UserIndex`
+-- Constraints for table `cms_core_ncc_page_history`
 --
-ALTER TABLE `cms__UserIndex`
-  ADD CONSTRAINT `cms__FK_UserIndex` FOREIGN KEY (`DocumentId`) REFERENCES `cms__Document` (`Id`);
+ALTER TABLE `cms_core_ncc_page_history`
+  ADD CONSTRAINT `FK_cms_core_ncc_page_history_cms_core_ncc_page_ParentId` FOREIGN KEY (`ParentId`) REFERENCES `cms_core_ncc_page` (`Id`) ON DELETE NO ACTION;
+
+--
+-- Constraints for table `cms_core_ncc_permission_details`
+--
+ALTER TABLE `cms_core_ncc_permission_details`
+  ADD CONSTRAINT `FK_cms_core_ncc_permission_details_cms_core_ncc_permission_Permi` FOREIGN KEY (`PermissionId`) REFERENCES `cms_core_ncc_permission` (`Id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_cms_core_ncc_permission_details_cms_core_ncc_user_ExtraAllowU` FOREIGN KEY (`ExtraAllowUserId`) REFERENCES `cms_core_ncc_user` (`Id`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `FK_cms_core_ncc_permission_details_cms_core_ncc_user_ExtraDenyUs` FOREIGN KEY (`ExtraDenyUserId`) REFERENCES `cms_core_ncc_user` (`Id`) ON DELETE NO ACTION;
+
+--
+-- Constraints for table `cms_core_ncc_post`
+--
+ALTER TABLE `cms_core_ncc_post`
+  ADD CONSTRAINT `FK_cms_core_ncc_post_cms_core_ncc_post_ParentId` FOREIGN KEY (`ParentId`) REFERENCES `cms_core_ncc_post` (`Id`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `FK_cms_core_ncc_post_cms_core_ncc_user_AuthorId` FOREIGN KEY (`AuthorId`) REFERENCES `cms_core_ncc_user` (`Id`) ON DELETE NO ACTION;
+
+--
+-- Constraints for table `cms_core_ncc_post_category`
+--
+ALTER TABLE `cms_core_ncc_post_category`
+  ADD CONSTRAINT `FK_cms_core_ncc_post_category_cms_core_ncc_category_CategoryId` FOREIGN KEY (`CategoryId`) REFERENCES `cms_core_ncc_category` (`Id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_cms_core_ncc_post_category_cms_core_ncc_post_PostId` FOREIGN KEY (`PostId`) REFERENCES `cms_core_ncc_post` (`Id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cms_core_ncc_post_details`
+--
+ALTER TABLE `cms_core_ncc_post_details`
+  ADD CONSTRAINT `FK_cms_core_ncc_post_details_cms_core_ncc_post_PostId` FOREIGN KEY (`PostId`) REFERENCES `cms_core_ncc_post` (`Id`) ON DELETE NO ACTION;
+
+--
+-- Constraints for table `cms_core_ncc_post_tag`
+--
+ALTER TABLE `cms_core_ncc_post_tag`
+  ADD CONSTRAINT `FK_cms_core_ncc_post_tag_cms_core_ncc_post_PostId` FOREIGN KEY (`PostId`) REFERENCES `cms_core_ncc_post` (`Id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_cms_core_ncc_post_tag_cms_core_ncc_tag_TagId` FOREIGN KEY (`TagId`) REFERENCES `cms_core_ncc_tag` (`Id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cms_core_ncc_startup`
+--
+ALTER TABLE `cms_core_ncc_startup`
+  ADD CONSTRAINT `FK_cms_core_ncc_startup_cms_core_ncc_permission_PermissionId` FOREIGN KEY (`PermissionId`) REFERENCES `cms_core_ncc_permission` (`Id`) ON DELETE NO ACTION;
+
+--
+-- Constraints for table `cms_core_ncc_user_permission`
+--
+ALTER TABLE `cms_core_ncc_user_permission`
+  ADD CONSTRAINT `FK_cms_core_ncc_user_permission_cms_core_ncc_permission_Permissi` FOREIGN KEY (`PermissionId`) REFERENCES `cms_core_ncc_permission` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_cms_core_ncc_user_permission_cms_core_ncc_user_UserId` FOREIGN KEY (`UserId`) REFERENCES `cms_core_ncc_user` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `cms_core_ncc_user_role`
+--
+ALTER TABLE `cms_core_ncc_user_role`
+  ADD CONSTRAINT `FK_cms_core_ncc_user_role_cms_core_ncc_role_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `cms_core_ncc_role` (`Id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_cms_core_ncc_user_role_cms_core_ncc_user_UserId` FOREIGN KEY (`UserId`) REFERENCES `cms_core_ncc_user` (`Id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cms_core_ncc_web_site_info`
+--
+ALTER TABLE `cms_core_ncc_web_site_info`
+  ADD CONSTRAINT `FK_cms_core_ncc_web_site_info_cms_core_ncc_web_site_NccWebSiteId` FOREIGN KEY (`NccWebSiteId`) REFERENCES `cms_core_ncc_web_site` (`Id`) ON DELETE NO ACTION;
+
+--
+-- Constraints for table `cms_core_ncc_web_site_widget`
+--
+ALTER TABLE `cms_core_ncc_web_site_widget`
+  ADD CONSTRAINT `FK_cms_core_ncc_web_site_widget_cms_core_ncc_web_site_WebSiteId` FOREIGN KEY (`WebSiteId`) REFERENCES `cms_core_ncc_web_site` (`Id`) ON DELETE NO ACTION;
+
+--
+-- Constraints for table `cms_core_ncc_widget`
+--
+ALTER TABLE `cms_core_ncc_widget`
+  ADD CONSTRAINT `FK_cms_core_ncc_widget_cms_core_ncc_plugins_NccPluginsId` FOREIGN KEY (`NccPluginsId`) REFERENCES `cms_core_ncc_plugins` (`Id`) ON DELETE NO ACTION;
+
+--
+-- Constraints for table `cms_ef_identity_role_claim_1`
+--
+ALTER TABLE `cms_ef_identity_role_claim_1`
+  ADD CONSTRAINT `FK_cms_ef_identity_role_claim_1_cms_core_ncc_role_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `cms_core_ncc_role` (`Id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cms_ef_identity_user_claim_1`
+--
+ALTER TABLE `cms_ef_identity_user_claim_1`
+  ADD CONSTRAINT `FK_cms_ef_identity_user_claim_1_cms_core_ncc_user_NccUserId` FOREIGN KEY (`NccUserId`) REFERENCES `cms_core_ncc_user` (`Id`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `FK_cms_ef_identity_user_claim_1_cms_core_ncc_user_UserId` FOREIGN KEY (`UserId`) REFERENCES `cms_core_ncc_user` (`Id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cms_ef_identity_user_login_1`
+--
+ALTER TABLE `cms_ef_identity_user_login_1`
+  ADD CONSTRAINT `FK_cms_ef_identity_user_login_1_cms_core_ncc_user_NccUserId` FOREIGN KEY (`NccUserId`) REFERENCES `cms_core_ncc_user` (`Id`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `FK_cms_ef_identity_user_login_1_cms_core_ncc_user_UserId` FOREIGN KEY (`UserId`) REFERENCES `cms_core_ncc_user` (`Id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cms_ef_identity_user_token_1`
+--
+ALTER TABLE `cms_ef_identity_user_token_1`
+  ADD CONSTRAINT `FK_cms_ef_identity_user_token_1_cms_core_ncc_user_UserId` FOREIGN KEY (`UserId`) REFERENCES `cms_core_ncc_user` (`Id`) ON DELETE CASCADE;
