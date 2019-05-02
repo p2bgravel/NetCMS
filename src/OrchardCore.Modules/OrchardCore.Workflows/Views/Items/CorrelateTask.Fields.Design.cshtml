@@ -1,6 +1,0 @@
-@model ActivityViewModel<CorrelateTask>
-
-<header>
-    <h4><i class="fa fa-link"></i>@Model.Activity.GetTitleOrDefault(() => T["Correlate"])</h4>
-</header>
-<span>@T["<em>{0}</em>", Model.Activity.Value]</span>
